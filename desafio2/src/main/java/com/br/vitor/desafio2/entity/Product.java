@@ -2,12 +2,11 @@ package com.br.vitor.desafio2.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,16 +15,49 @@ import java.math.BigDecimal;
 @Setter
 @ToString
 @EqualsAndHashCode(exclude = {"id"})
+@Table(name = "product")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private BigDecimal price;
-    private String category;
+
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "barcode")
+    private String barCode;
+
+    @Column(name = "series")
+    private String series;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "manufacturingdate")
+    private LocalDate manufacturingDate;
+
+    @Column(name = "expirationdate")
+    private LocalDate expirationDate;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "material")
+    private String material;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "amount")
     private Integer amount;
 
 }
