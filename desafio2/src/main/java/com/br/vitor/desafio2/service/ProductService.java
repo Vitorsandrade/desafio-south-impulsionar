@@ -4,8 +4,10 @@ import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.repository.ProductRepository;
 import com.br.vitor.desafio2.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,14 +29,22 @@ public class ProductService {
         return repository.save(product);
     }
 
-    public void delete(Long id){
-        repository.deleteById(id);
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
-    public Product update(Long id, Product product){
-        Product entity = repository.getById(id);
-        updateData(entity, product);
-        return repository.save(entity);
+    public Product update(Long id, Product product) {
+        try {
+            Product entity = repository.getById(id);
+            updateData(entity, product);
+            return repository.save(entity);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(Product entity, Product product) {

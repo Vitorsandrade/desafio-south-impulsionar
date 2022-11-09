@@ -15,7 +15,7 @@ import java.util.Date;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "product")
+@Table(name = "tb_product")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class Product implements Serializable {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "barcode")
+    @Column(name = "bar_code")
     private String barCode;
 
     @Column(name = "series")
@@ -43,10 +43,10 @@ public class Product implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "manufacturingdate")
+    @Column(name = "manufacturing_date")
     private LocalDate manufacturingDate;
 
-    @Column(name = "expirationdate")
+    @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
     @Column(name = "color")
