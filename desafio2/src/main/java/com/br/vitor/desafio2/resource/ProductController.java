@@ -1,5 +1,6 @@
 package com.br.vitor.desafio2.resource;
 
+import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.service.ProductService;
 
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -18,9 +20,10 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
+    public ResponseEntity<List<ProductDTO>> findAll() {
         List<Product> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<ProductDTO> listDto = list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 
     @GetMapping(value = "/{id}")
