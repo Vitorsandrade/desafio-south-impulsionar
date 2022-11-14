@@ -6,14 +6,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
-@ToString
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "tb_product")
 public class Product implements Serializable {
@@ -25,22 +22,17 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code")
     private String code;
 
     @Column(name = "bar_code")
     private String barCode;
 
-    @Column(name = "series")
     private String series;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "price")
     private BigDecimal price;
 
     @Column(name = "manufacturing_date")
@@ -49,16 +41,12 @@ public class Product implements Serializable {
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
-    @Column(name = "color")
     private String color;
 
-    @Column(name = "material")
     private String material;
 
-    @Column(name = "category")
     private String category;
 
-    @Column(name = "amount")
     private Integer amount;
 
 }

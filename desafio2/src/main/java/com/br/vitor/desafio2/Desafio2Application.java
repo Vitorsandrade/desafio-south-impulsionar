@@ -1,6 +1,6 @@
 package com.br.vitor.desafio2;
 
-import com.br.vitor.desafio2.entity.Product;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

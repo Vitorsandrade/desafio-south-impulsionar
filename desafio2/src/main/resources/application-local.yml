@@ -8,3 +8,7 @@ spring:
       path: /h2-console
   jpa:
     show-sql: true
+  security:
+    user:
+      name: vitor
+      password: vitor

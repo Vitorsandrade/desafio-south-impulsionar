@@ -1,8 +1,10 @@
 package com.br.vitor.desafio2.service;
 
+import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.repository.ProductRepository;
 import com.br.vitor.desafio2.service.exceptions.ResourceNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -12,20 +14,22 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
-    @Autowired
     private ProductRepository repository;
 
-    public List<Product> findAll() {
+    public List<Product> findAll() { 
         return repository.findAll();
     }
 
     public Product findById(Long id) {
         Optional<Product> obj = repository.findById(id);
+
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Product insert(Product product) {
+
         return repository.save(product);
     }
 
@@ -41,8 +45,9 @@ public class ProductService {
         try {
             Product entity = repository.getById(id);
             updateData(entity, product);
+
             return repository.save(entity);
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
     }
@@ -62,4 +67,12 @@ public class ProductService {
         entity.setSeries(product.getSeries());
     }
 
+    public Product cathDTO(ProductDTO productDTO) {
+
+        return new Product(productDTO.getId(), productDTO.getCode(), productDTO.getBarCode(),
+                productDTO.getSeries(), productDTO.getName(), productDTO.getDescription(),
+                productDTO.getPrice(), productDTO.getManufacturingDate(),
+                productDTO.getExpirationDate(), productDTO.getColor(), productDTO.getMaterial(),
+                productDTO.getCategory(), productDTO.getAmount());
+    }
 }

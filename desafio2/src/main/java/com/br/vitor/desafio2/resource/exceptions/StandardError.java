@@ -13,7 +13,8 @@ import java.time.Instant;
 @Getter
 @Setter
 public class StandardError implements Serializable {
-    private static  final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
 
     private Instant timestamp;
     private Integer status;
