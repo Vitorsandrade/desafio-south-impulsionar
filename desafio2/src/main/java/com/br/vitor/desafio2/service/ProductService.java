@@ -4,32 +4,29 @@ import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.repository.ProductRepository;
 import com.br.vitor.desafio2.service.exceptions.ResourceNotFoundException;
+import com.br.vitor.desafio2.service.exceptions.InvalidFileException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
 public class ProductService {
     private ProductRepository repository;
 
-    public List<Product> findAll() { 
+    public List<Product> findAll() {
         return repository.findAll();
     }
 
@@ -40,7 +37,10 @@ public class ProductService {
     }
 
     public Product insert(Product product) {
-
+        product.setCode(generateCode());
+        product.setBarCode(generateCodBar());
+        product.setManufacturingDate(LocalDate.now());
+        product.setExpirationDate(null);
         return repository.save(product);
     }
 
@@ -60,6 +60,20 @@ public class ProductService {
             return repository.save(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
+        }
+    }
+
+    public Product insertFromFile(String code, Product product) {
+        try {
+            if (repository.getByCode(code) == null) {
+                return repository.save(product);
+            }
+            Product entity = repository.getByCode(code);
+            updateData(entity, product);
+
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(e);
         }
     }
 
@@ -88,13 +102,7 @@ public class ProductService {
     }
 
 
-
-    public String extractExtension(String fileName) {
-        int i = fileName.lastIndexOf(".");
-        return fileName.substring(i + 1);
-    }
-
-    public void saveDataFromFile(String path){
+    public void saveDataFromFile(String path) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line = br.readLine();
@@ -103,12 +111,92 @@ public class ProductService {
             while ((line = br.readLine()) != null) {
                 data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
-                Product product = new Product("12sdrevf","123456789012","12/09",data[0]
-                        ,"ótimo", BigDecimal.ONE, LocalDate.now(),LocalDate.now(), data[2],"ferro", data[1],10);
-                insert(product);
+
+                BigDecimal price = finalValue(data[7], data[6]);
+
+                DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                LocalDate manufacturingDate = LocalDate.parse(data[8], fmt1);
+
+                LocalDate expirationDate = null;
+
+                if (!data[9].equals("n/a")) {
+                    expirationDate = LocalDate.parse(data[9], fmt1);
+                }
+
+
+                Product product = new Product(null, data[0], data[1], data[2], data[3], data[4], price,
+                        manufacturingDate, expirationDate, data[10], data[11], data[5], Integer.parseInt(data[12]));
+
+                insertFromFile(data[0], product);
+
+
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidFileException(e.getMessage());
+        } catch (IOException e) {
+            throw new InvalidFileException(e.getMessage());
         }
+    }
+
+    public static BigDecimal finalValue(String taxValue, String grossValue) {
+
+        BigDecimal profitMargin = new BigDecimal("45").divide(new BigDecimal("100")).add(new BigDecimal("1"));
+
+        BigDecimal tax = new BigDecimal(taxValue.replace(",", ".").replace("\"", "")).divide(new BigDecimal("100"))
+                .add(new BigDecimal("1"));
+
+        BigDecimal price = new BigDecimal(grossValue.replace(",", ".").replace("\"", "")).multiply(tax)
+                .multiply(profitMargin).setScale(2, RoundingMode.CEILING);
+
+        return price;
+    }
+
+
+    public String extractExtension(String fileName) {
+        int i = fileName.lastIndexOf(".");
+        return fileName.substring(i + 1);
+    }
+
+    public String generateCodBar() {
+
+        String characters = "0123456789";
+        String randomString = "";
+        int length = 12;
+
+        Random rand = new Random();
+
+        char[] text = new char[length];
+
+        for (int i = 0; i < length; i++) {
+            text[i] = characters.charAt(rand.nextInt(characters.length()));
+        }
+
+        for (int i = 0; i < text.length; i++) {
+            randomString += text[i];
+        }
+
+        return randomString;
+    }
+
+    public String generateCode() {
+        String characters = "abcdefghijkmnopqrstuvwxyz023456789";
+        String randomString = "";
+        int length = 8;
+
+        Random rand = new Random();
+
+        char[] text = new char[length];
+
+        for (int i = 0; i < length; i++) {
+            text[i] = characters.charAt(rand.nextInt(characters.length()));
+        }
+
+        for (int i = 0; i < text.length; i++) {
+            randomString += text[i];
+        }
+
+        return randomString;
+
     }
 }
