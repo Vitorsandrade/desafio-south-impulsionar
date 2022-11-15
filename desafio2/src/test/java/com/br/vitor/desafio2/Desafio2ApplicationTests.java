@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 
 @SpringBootTest
 class Desafio2ApplicationTests {
-	@Test
-	void test1() {
-
-	}
+//	@Test
+//	void test1() {
+//
+//	}
 
 }

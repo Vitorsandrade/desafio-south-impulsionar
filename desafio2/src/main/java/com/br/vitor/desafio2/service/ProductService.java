@@ -7,11 +7,22 @@ import com.br.vitor.desafio2.service.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -74,5 +85,30 @@ public class ProductService {
                 productDTO.getPrice(), productDTO.getManufacturingDate(),
                 productDTO.getExpirationDate(), productDTO.getColor(), productDTO.getMaterial(),
                 productDTO.getCategory(), productDTO.getAmount());
+    }
+
+
+
+    public String extractExtension(String fileName) {
+        int i = fileName.lastIndexOf(".");
+        return fileName.substring(i + 1);
+    }
+
+    public void saveDataFromFile(String path){
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line = br.readLine();
+            String data[];
+
+            while ((line = br.readLine()) != null) {
+                data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+
+                Product product = new Product("12sdrevf","123456789012","12/09",data[0]
+                        ,"ótimo", BigDecimal.ONE, LocalDate.now(),LocalDate.now(), data[2],"ferro", data[1],10);
+                insert(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

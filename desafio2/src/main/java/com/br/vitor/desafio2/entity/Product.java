@@ -49,4 +49,18 @@ public class Product implements Serializable {
 
     private Integer amount;
 
+    public Product(String code, String barCode, String series, String name, String description, BigDecimal price, LocalDate manufacturingDate, LocalDate expirationDate, String color, String material, String category, Integer amount) {
+        this.code = code;
+        this.barCode = barCode;
+        this.series = series;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.manufacturingDate = manufacturingDate;
+        this.expirationDate = expirationDate;
+        this.color = color;
+        this.material = material;
+        this.category = category;
+        this.amount = amount;
+    }
 }

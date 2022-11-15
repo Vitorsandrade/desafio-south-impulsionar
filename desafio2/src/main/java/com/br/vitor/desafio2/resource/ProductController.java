@@ -3,15 +3,20 @@ package com.br.vitor.desafio2.resource;
 import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.service.ProductService;
-
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -59,4 +64,23 @@ public class ProductController {
 
         return ResponseEntity.ok().body(product);
     }
+
+    @PostMapping(value = "/test")
+    public ResponseEntity<Void> upload(@RequestParam("file") MultipartFile file) {
+        String pathApp = "src/main/resources/imports/";
+        String path = pathApp + UUID.randomUUID() + "." + service.extractExtension(file.getOriginalFilename());
+
+        try {
+            Files.copy(file.getInputStream(), Path.of(path), StandardCopyOption.REPLACE_EXISTING);
+            service.saveDataFromFile(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return ResponseEntity.ok().build();
+
+    }
+
+
 }
