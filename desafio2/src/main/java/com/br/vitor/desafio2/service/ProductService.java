@@ -15,6 +15,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -62,21 +65,6 @@ public class ProductService {
             throw new ResourceNotFoundException(id);
         }
     }
-
-    public Product insertFromFile(String code, Product product) {
-        try {
-            if (repository.getByCode(code) == null) {
-                return repository.save(product);
-            }
-            Product entity = repository.getByCode(code);
-            updateData(entity, product);
-
-            return repository.save(entity);
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(e);
-        }
-    }
-
     private void updateData(Product entity, Product product) {
         entity.setAmount(product.getAmount());
         entity.setCategory(product.getCategory());
@@ -92,6 +80,20 @@ public class ProductService {
         entity.setSeries(product.getSeries());
     }
 
+    public Product insertFromFile(String code, Product product) {
+        try {
+            if (repository.getByCode(code) == null) {
+                return repository.save(product);
+            }
+            Product entity = repository.getByCode(code);
+            updateData(entity, product);
+
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(e);
+        }
+    }
+
     public Product cathDTO(ProductDTO productDTO) {
 
         return new Product(productDTO.getId(), productDTO.getCode(), productDTO.getBarCode(),
@@ -101,8 +103,7 @@ public class ProductService {
                 productDTO.getCategory(), productDTO.getAmount());
     }
 
-
-    public void saveDataFromFile(String path) {
+    public void saveDataFromFile(String path) throws IOException {
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line = br.readLine();
@@ -124,18 +125,22 @@ public class ProductService {
                     expirationDate = LocalDate.parse(data[9], fmt1);
                 }
 
-
                 Product product = new Product(null, data[0], data[1], data[2], data[3], data[4], price,
                         manufacturingDate, expirationDate, data[10], data[11], data[5], Integer.parseInt(data[12]));
 
                 insertFromFile(data[0], product);
 
-
             }
+
+
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidFileException(e.getMessage());
         } catch (IOException e) {
             throw new InvalidFileException(e.getMessage());
+        } finally {
+
+            Path deleteFile = Paths.get(path);
+            Files.deleteIfExists(deleteFile);
         }
     }
 
@@ -197,6 +202,5 @@ public class ProductService {
         }
 
         return randomString;
-
     }
 }

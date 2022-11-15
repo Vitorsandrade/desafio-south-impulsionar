@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/api/products")
 public class ProductController {
     private ProductService service;
 
@@ -66,7 +66,7 @@ public class ProductController {
 
     @PostMapping(value = "/upload")
     public ResponseEntity<Void> upload(@RequestParam("file") MultipartFile file) throws IOException {
-        String pathDirectory = "src/main/resources/imports/";
+        String pathDirectory = "src/main/resources/";
         String path = pathDirectory + UUID.randomUUID() + "." + service.extractExtension(file.getOriginalFilename());
 
         Files.copy(file.getInputStream(), Path.of(path), StandardCopyOption.REPLACE_EXISTING);

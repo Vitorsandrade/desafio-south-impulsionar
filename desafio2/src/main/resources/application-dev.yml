@@ -3,3 +3,10 @@ spring:
     username: postgres
     password: postgres
     url: jdbc:postgresql://localhost:5432/DB_impulsionar2?serverTimezone=UTC
+
+security:
+  oauth2:
+    client:
+      scope: password
+      client-id: south
+      client-secret: 12345

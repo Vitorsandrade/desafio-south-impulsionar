@@ -27,7 +27,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(InvalidFileException.class)
     public ResponseEntity<StandardError> invalidFile(InvalidFileException e,
-                                                          HttpServletRequest request) {
+                                                     HttpServletRequest request) {
 
         String error = "Resource not found";
         HttpStatus status = HttpStatus.NOT_FOUND;

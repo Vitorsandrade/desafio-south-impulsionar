@@ -1,2 +1,0 @@
-exemplo
-carro,automovel,preto
