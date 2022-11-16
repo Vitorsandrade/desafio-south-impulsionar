@@ -4,6 +4,7 @@ import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,9 +26,9 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> findAll() {
-        List<Product> list = service.findAll();
-        List<ProductDTO> listDto = list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+    public ResponseEntity<List<ProductDTO>> findAll(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                    @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        List<ProductDTO> listDto = service.findAll(PageRequest.of(page, size));
 
         return ResponseEntity.ok().body(listDto);
     }
@@ -64,6 +65,7 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
+    //tratamento com file.isempity
     @PostMapping(value = "/upload")
     public ResponseEntity<Void> upload(@RequestParam("file") MultipartFile file) throws IOException {
         String pathDirectory = "src/main/resources/";

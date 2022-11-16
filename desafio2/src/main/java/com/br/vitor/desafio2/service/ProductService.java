@@ -7,6 +7,7 @@ import com.br.vitor.desafio2.service.exceptions.ResourceNotFoundException;
 import com.br.vitor.desafio2.service.exceptions.InvalidFileException;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -23,14 +24,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ProductService {
     private ProductRepository repository;
 
-    public List<Product> findAll() {
-        return repository.findAll();
+    public List<ProductDTO> findAll(Pageable pageable) {
+        List<ProductDTO> list = repository.findAll(pageable).stream().map(ProductDTO::new)
+                .collect(Collectors.toList());
+
+        return list;
     }
 
     public Product findById(Long id) {
