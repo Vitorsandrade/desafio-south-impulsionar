@@ -11,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Files;
@@ -110,11 +108,14 @@ public class ProductService {
 
     public void saveDataFromFile(String path) throws IOException {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
+
             String line = br.readLine();
             String data[];
 
-            while ((line = br.readLine()) != null) {
+            while((line = br.readLine()) != null) {
+
                 data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
 
@@ -136,7 +137,7 @@ public class ProductService {
                 insertFromFile(data[0], product);
 
             }
-
+            br.close();
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidFileException(e.getMessage());
