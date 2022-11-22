@@ -1,16 +1,16 @@
 # Explicação dos comandos:
 
-version: "3.1" : versao do compose
+version: "3.5" : versao do compose
 
 services: setando os serviços
 
-db: #nome do serviço
-image: postgres:14.2-alpine #setando a imagem
+database: #nome do serviço
+image: postgres:14-alpine #setando a imagem
 restart: always #definindo estratégia de restart
 environment:
 POSTGRES_PASSWORD: postgres #setando a senha
 ports:
-- "5432:5432" #expondo a porta padrão do postgres
+- "5434:5432" #expondo a porta 5434
 
 * POSTGRES_USER é OPCIONAL. Se nao setar POSTGRES_USER será usado o padrão "postgres"
 * POSTGRES_DB é OPCIONAL. Se nao setar POSTGRES_DB será usado o nome do POSTGRES_USER
