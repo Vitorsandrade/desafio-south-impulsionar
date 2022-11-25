@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: ${POSTGRES_URL_DB}
