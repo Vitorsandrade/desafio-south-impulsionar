@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -30,7 +32,7 @@ public class Product implements Serializable {
 
     private String series;
 
-
+    @NotEmpty(message = "The product name cannot be empty ")
     private String name;
 
     private String description;
