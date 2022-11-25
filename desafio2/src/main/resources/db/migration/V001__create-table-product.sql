@@ -1,9 +1,9 @@
 CREATE TABLE tb_product (
 
     id SERIAL PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    price NUMERIC NOT NULL,
-    category VARCHAR(30) NOT NULL,
+    name VARCHAR(60),
+    price NUMERIC,
+    category VARCHAR(30),
     amount INT DEFAULT (0),
     code varchar (10),
     bar_code varchar (15),
