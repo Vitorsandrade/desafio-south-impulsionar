@@ -27,12 +27,12 @@ Neste projeto mostraremos como armazenar Produtos no postgreSQL.
 - A aplicação contém uma camada de segurança e foi utilizado o protocolo OAuth2, logo, as requisições da API exigem um token de segurança.
 - Para conseguir o token vá na requisição **POST - token** da sua coleção, e copie o conteúdo que foi passado no campo "access_token" como mostra abaixo:
 
-image
+![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/access_token.png)
 
 - para utilização de qualquer uma das requisições informe o token de acesso na aba **Authorization** da requisição, utilize o type **Bearer Token**
 e informe o token que foi passado:
 
-image
+![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/token_requisi%C3%A7%C3%A3o.png)
 
 ## Requisições
 
@@ -40,7 +40,7 @@ image
 - Esta requisição serve para inserção de novos produtos.
 - informe no body todos atributos do produto que irá cadastrar(Os campos Id, code e barCode serão gerados automaticamentes na inserção do produto):
 
-image
+![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/Post%20-%20product.png)
 
 #### GET ALL - products
 - Esta requisição serve para listar dos os produtos que estão no seu banco.
@@ -62,7 +62,7 @@ image
 - Também pode ser passado qualquer outro arquivo .csv com o mesmo padrão.
 - Iforme o arquivo desejado na aba body e selecionando a opção form-data passando a chave **file** e o valor seria seu determinado arquivo:
 
-image
+![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/Import%20-%20products.png)
 
 
 
