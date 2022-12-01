@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,13 +21,17 @@ public class ProductDTO implements Serializable {
     private String code;
     private String barCode;
     private String series;
+    @NotBlank
     private String name;
     private String description;
+    @NotNull
     private BigDecimal price;
     private LocalDate manufacturingDate;
     private LocalDate expirationDate;
     private String color;
     private String material;
+    @NotBlank
+
     private String category;
     private Integer amount;
 

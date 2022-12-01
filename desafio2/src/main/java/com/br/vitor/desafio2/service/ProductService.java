@@ -47,6 +47,9 @@ public class ProductService {
         product.setBarCode(generateCodBar());
         product.setManufacturingDate(LocalDate.now());
         product.setExpirationDate(null);
+        String year = String.valueOf(LocalDate.now().getYear());
+        String month = String.valueOf(LocalDate.now().getMonthValue());
+        product.setSeries(month + "/" + year);
         return repository.save(product);
     }
 
