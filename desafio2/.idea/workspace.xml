@@ -9,7 +9,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b58bc5-a96c-482f-b2e6-2235d137bea7" name="Changes" comment="" />
+    <list default="true" id="d5b58bc5-a96c-482f-b2e6-2235d137bea7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/dto/ProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/exceptions/FileIsEmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/exceptions/FileIsEmptyException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/handler/ResourceExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/handler/ResourceExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/br/vitor/desafio2/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-docker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-local.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/dto/ProductDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/dto/ProductDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/entity/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/entity/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/exceptions/FileIsEmptyException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/exceptions/FileIsEmptyException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/handler/ResourceExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/handler/ResourceExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/br/vitor/desafio2/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projeto-south-vitor.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/projeto-south-vitor.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projeto-south-vitor.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/projeto-south-vitor.jar.original" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
