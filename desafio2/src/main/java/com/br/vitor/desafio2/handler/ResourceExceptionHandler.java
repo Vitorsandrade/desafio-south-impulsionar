@@ -15,9 +15,10 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> handlerResourceNotFound(ResourceNotFoundException e,
-                                                          HttpServletRequest request) {
+                                                                 HttpServletRequest request) {
 
         String error = "Resource not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -29,7 +30,8 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(InvalidFileException.class)
     public ResponseEntity<StandardError> handlerInvalidFile(InvalidFileException e,
-                                                     HttpServletRequest request) {
+                                                            HttpServletRequest request) {
+
 
         String error = "Resource not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -41,7 +43,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(FileIsEmptyException.class)
     public ResponseEntity<StandardError> handlerFileIsEmpty(FileIsEmptyException e,
-                                                     HttpServletRequest request) {
+                                                            HttpServletRequest request) {
 
         String error = "Invalid File!";
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -50,9 +52,10 @@ public class ResourceExceptionHandler {
 
         return ResponseEntity.status(status).body(err);
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> handlerMethodArgumentNotValid(MethodArgumentNotValidException e,
-                                                     HttpServletRequest request) {
+                                                                       HttpServletRequest request) {
 
         String error = "Fields: name, category and price cannot be null or empty!";
         HttpStatus status = HttpStatus.BAD_REQUEST;
