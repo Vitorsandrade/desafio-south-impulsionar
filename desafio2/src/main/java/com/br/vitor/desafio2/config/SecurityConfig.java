@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableWebSecurity
 @EnableAuthorizationServer
 @EnableResourceServer
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
@@ -23,17 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("admin").password("12345").roles("ADMIN");
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/swagger-ui/**", "/h2/**","/v3/api-docs/**");
+        return (web) -> web.ignoring().antMatchers("/swagger-ui/**", "/h2/**", "/v3/api-docs/**");
     }
 }

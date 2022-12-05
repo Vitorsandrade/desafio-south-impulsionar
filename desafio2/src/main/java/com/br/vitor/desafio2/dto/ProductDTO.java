@@ -4,7 +4,6 @@ import com.br.vitor.desafio2.entity.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -31,7 +30,6 @@ public class ProductDTO implements Serializable {
     private String color;
     private String material;
     @NotBlank
-
     private String category;
     private Integer amount;
 

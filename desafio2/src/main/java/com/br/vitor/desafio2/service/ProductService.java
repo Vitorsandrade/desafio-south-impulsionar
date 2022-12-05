@@ -71,6 +71,7 @@ public class ProductService {
             throw new ResourceNotFoundException(id);
         }
     }
+
     private void updateData(Product entity, Product product) {
         entity.setAmount(product.getAmount());
         entity.setCategory(product.getCategory());
@@ -117,7 +118,7 @@ public class ProductService {
             String line = br.readLine();
             String data[];
 
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
 
                 data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 

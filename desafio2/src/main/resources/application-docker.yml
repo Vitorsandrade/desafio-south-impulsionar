@@ -3,3 +3,12 @@ spring:
     username: postgres
     password: postgres
     url: ${POSTGRES_URL_DB}
+
+
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:db/migration
+    enabled: true
+    validate-on-migrate: true
