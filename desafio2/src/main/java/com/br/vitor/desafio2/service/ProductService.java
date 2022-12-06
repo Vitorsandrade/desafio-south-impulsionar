@@ -2,6 +2,7 @@ package com.br.vitor.desafio2.service;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
+import com.br.vitor.desafio2.mapper.ProductMapper;
 import com.br.vitor.desafio2.repository.ProductRepository;
 import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
 import com.br.vitor.desafio2.exceptions.InvalidFileException;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProductService {
     private ProductRepository repository;
+    private ProductMapper productMapper;
 
     public List<ProductDTO> findAll(Pageable pageable) {
         List<ProductDTO> list = repository.findAll(pageable).stream().map(ProductDTO::new)
@@ -99,15 +101,6 @@ public class ProductService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(e);
         }
-    }
-
-    public Product cathDTO(ProductDTO productDTO) {
-
-        return new Product(productDTO.getId(), productDTO.getCode(), productDTO.getBarCode(),
-                productDTO.getSeries(), productDTO.getName(), productDTO.getDescription(),
-                productDTO.getPrice(), productDTO.getManufacturingDate(),
-                productDTO.getExpirationDate(), productDTO.getColor(), productDTO.getMaterial(),
-                productDTO.getCategory(), productDTO.getAmount());
     }
 
     public void saveDataFromFile(String path) throws IOException {

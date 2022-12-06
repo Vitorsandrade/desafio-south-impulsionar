@@ -1,14 +1,14 @@
 package com.br.vitor.desafio2.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -31,10 +31,12 @@ public class Product implements Serializable {
 
     private String series;
 
+    @NotBlank
     private String name;
 
     private String description;
 
+    @NotNull
     private BigDecimal price;
 
     @Column(name = "manufacturing_date")
@@ -47,6 +49,7 @@ public class Product implements Serializable {
 
     private String material;
 
+    @NotBlank
     private String category;
 
     private Integer amount;
