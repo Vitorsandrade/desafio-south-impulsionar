@@ -2,6 +2,7 @@ package com.br.vitor.desafio2.resource;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
+import com.br.vitor.desafio2.mapper.ProductMapper;
 import com.br.vitor.desafio2.service.ProductService;
 import com.br.vitor.desafio2.exceptions.FileIsEmptyException;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.UUID;
 @RequestMapping(value = "/api/products")
 public class ProductController {
     private ProductService service;
+    ProductMapper productMapper;
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> findAll(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -42,13 +44,12 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity insert(@RequestBody @Valid ProductDTO productDTO) {
-        Product product = service.cathDTO(productDTO);
+    public ResponseEntity insert(@RequestBody @Valid Product product) {
         product = service.insert(product);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(product.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(product);
+        return ResponseEntity.created(uri).body(productMapper.toProductDTO(product));
     }
 
     @DeleteMapping(value = "/{id}")
@@ -59,14 +60,13 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
-        Product product = service.cathDTO(productDTO);
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody Product product) {
         product = service.update(id, product);
 
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok().body(productMapper.toProductDTO(product));
     }
 
-    //tratamento com file.isempity
+
     @PostMapping(value = "/upload")
     public ResponseEntity<Void> upload(@RequestParam("file") MultipartFile file) throws FileIsEmptyException {
 
