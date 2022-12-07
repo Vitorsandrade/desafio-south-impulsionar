@@ -1,10 +1,12 @@
 com\br\vitor\desafio2\exceptions\FileIsEmptyException.class
+com\br\vitor\desafio2\mapper\ProductMapperImpl.class
 com\br\vitor\desafio2\exceptions\ResourceNotFoundException.class
 com\br\vitor\desafio2\Desafio2Application.class
 com\br\vitor\desafio2\config\SecurityConfig.class
 com\br\vitor\desafio2\handler\ResourceExceptionHandler.class
 com\br\vitor\desafio2\entity\Product.class
 com\br\vitor\desafio2\handler\StandardError.class
+com\br\vitor\desafio2\mapper\ProductMapper.class
 com\br\vitor\desafio2\handler\StandardError$StandardErrorBuilder.class
 com\br\vitor\desafio2\resource\ProductController.class
 com\br\vitor\desafio2\dto\ProductDTO.class

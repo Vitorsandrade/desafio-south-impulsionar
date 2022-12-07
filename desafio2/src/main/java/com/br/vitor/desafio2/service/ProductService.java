@@ -8,6 +8,7 @@ import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
 import com.br.vitor.desafio2.exceptions.InvalidFileException;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,22 +21,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ProductService {
     private ProductRepository repository;
-    private ProductMapper productMapper;
 
-    public List<ProductDTO> findAll(Pageable pageable) {
-        List<ProductDTO> list = repository.findAll(pageable).stream().map(ProductDTO::new)
-                .collect(Collectors.toList());
 
-        return list;
+    public Page<Product> listAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Product findById(Long id) {
@@ -128,8 +124,9 @@ public class ProductService {
                     expirationDate = LocalDate.parse(data[9], fmt1);
                 }
 
-                Product product = new Product(null, data[0], data[1], data[2], data[3], data[4], price,
-                        manufacturingDate, expirationDate, data[10], data[11], data[5], Integer.parseInt(data[12]));
+                Product product = Product.builder().id(null).code(data[0]).barCode(data[1]).series(data[2]).name(data[3])
+                        .description(data[4]).price(price).manufacturingDate(manufacturingDate).expirationDate(expirationDate)
+                        .color(data[10]).material(data[11]).category(data[5]).amount(Integer.parseInt(data[12])).build();
 
                 insertFromFile(data[0], product);
 
