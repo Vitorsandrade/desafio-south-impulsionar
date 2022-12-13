@@ -1,16 +1,15 @@
 package com.br.vitor.desafio2.dto;
 
-import com.br.vitor.desafio2.entity.Product;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.With;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
+@Builder
+@With
 public class ProductDTO {
 
     private Long id;
@@ -19,29 +18,12 @@ public class ProductDTO {
     private String series;
     private String name;
     private String description;
-
     private BigDecimal price;
     private LocalDate manufacturingDate;
     private LocalDate expirationDate;
     private String color;
     private String material;
-
     private String category;
     private Integer amount;
 
-    public ProductDTO(Product product) {
-        id = product.getId();
-        code = product.getCode();
-        barCode = product.getBarCode();
-        series = product.getSeries();
-        name = product.getName();
-        description = product.getDescription();
-        price = product.getPrice();
-        manufacturingDate = product.getManufacturingDate();
-        expirationDate = product.getExpirationDate();
-        color = product.getColor();
-        material = product.getMaterial();
-        amount = product.getAmount();
-        category = product.getCategory();
-    }
 }

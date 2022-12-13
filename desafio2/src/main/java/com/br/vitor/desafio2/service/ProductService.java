@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.*;
@@ -29,6 +30,8 @@ import java.util.Random;
 public class ProductService {
     private ProductRepository repository;
 
+    private ProductMapper productMapper;
+
 
     public Page<Product> listAll(Pageable pageable) {
         return repository.findAll(pageable);
@@ -40,7 +43,7 @@ public class ProductService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Product insert(Product product) {
+    public ProductDTO insert(Product product) {
         product.setCode(generateCode());
         product.setBarCode(generateCodBar());
         product.setManufacturingDate(LocalDate.now());
@@ -48,7 +51,8 @@ public class ProductService {
         String year = String.valueOf(LocalDate.now().getYear());
         String month = String.valueOf(LocalDate.now().getMonthValue());
         product.setSeries(month + "/" + year);
-        return repository.save(product);
+        repository.save(product);
+        return productMapper.toProductDTO(product);
     }
 
     public void delete(Long id) {
@@ -59,18 +63,18 @@ public class ProductService {
         }
     }
 
-    public Product update(Long id, Product product) {
+    public ProductDTO update(Long id, Product product) {
         try {
             Product entity = repository.getById(id);
             updateData(entity, product);
-
-            return repository.save(entity);
+            repository.save(entity);
+            return productMapper.toProductDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    private void updateData(Product entity, Product product) {
+    public void updateData(Product entity, Product product) {
         entity.setAmount(product.getAmount());
         entity.setCategory(product.getCategory());
         entity.setColor(product.getColor());

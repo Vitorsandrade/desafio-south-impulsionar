@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-06T16:19:33-0300",
+    date = "2022-12-13T09:51:30-0300",
     comments = "version: 1.5.0.Final, compiler: javac, environment: Java 11.0.12 (Oracle Corporation)"
 )
 @Component
@@ -19,22 +19,47 @@ public class ProductMapperImpl implements ProductMapper {
             return null;
         }
 
-        ProductDTO productDTO = new ProductDTO();
+        ProductDTO.ProductDTOBuilder productDTO = ProductDTO.builder();
 
-        productDTO.setId( product.getId() );
-        productDTO.setCode( product.getCode() );
-        productDTO.setBarCode( product.getBarCode() );
-        productDTO.setSeries( product.getSeries() );
-        productDTO.setName( product.getName() );
-        productDTO.setDescription( product.getDescription() );
-        productDTO.setPrice( product.getPrice() );
-        productDTO.setManufacturingDate( product.getManufacturingDate() );
-        productDTO.setExpirationDate( product.getExpirationDate() );
-        productDTO.setColor( product.getColor() );
-        productDTO.setMaterial( product.getMaterial() );
-        productDTO.setCategory( product.getCategory() );
-        productDTO.setAmount( product.getAmount() );
+        productDTO.id( product.getId() );
+        productDTO.code( product.getCode() );
+        productDTO.barCode( product.getBarCode() );
+        productDTO.series( product.getSeries() );
+        productDTO.name( product.getName() );
+        productDTO.description( product.getDescription() );
+        productDTO.price( product.getPrice() );
+        productDTO.manufacturingDate( product.getManufacturingDate() );
+        productDTO.expirationDate( product.getExpirationDate() );
+        productDTO.color( product.getColor() );
+        productDTO.material( product.getMaterial() );
+        productDTO.category( product.getCategory() );
+        productDTO.amount( product.getAmount() );
 
-        return productDTO;
+        return productDTO.build();
+    }
+
+    @Override
+    public Product productToProduct(Product product) {
+        if ( product == null ) {
+            return null;
+        }
+
+        Product.ProductBuilder product1 = Product.builder();
+
+        product1.id( product.getId() );
+        product1.code( product.getCode() );
+        product1.barCode( product.getBarCode() );
+        product1.series( product.getSeries() );
+        product1.name( product.getName() );
+        product1.description( product.getDescription() );
+        product1.price( product.getPrice() );
+        product1.manufacturingDate( product.getManufacturingDate() );
+        product1.expirationDate( product.getExpirationDate() );
+        product1.color( product.getColor() );
+        product1.material( product.getMaterial() );
+        product1.category( product.getCategory() );
+        product1.amount( product.getAmount() );
+
+        return product1.build();
     }
 }

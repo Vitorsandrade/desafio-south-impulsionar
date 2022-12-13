@@ -2,7 +2,6 @@ package com.br.vitor.desafio2.handler;
 
 import lombok.*;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -10,9 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class StandardError implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class StandardError {
 
     private LocalDateTime timestamp;
     private Integer status;

@@ -8,14 +8,13 @@ import com.br.vitor.desafio2.exceptions.FileIsEmptyException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -34,39 +33,30 @@ public class ProductController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
-        Product product = service.findById(id);
-
-        return ResponseEntity.ok().body(new ProductDTO(product));
+    public ResponseEntity<Product> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity insert(@RequestBody @Valid Product product) {
-        product = service.insert(product);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(product.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(productMapper.toProductDTO(product));
+    public ResponseEntity<ProductDTO> insert(@RequestBody @Valid Product product) {
+        return new ResponseEntity<>(service.insert(product), HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
-
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody Product product) {
-        product = service.update(id, product);
-
-        return ResponseEntity.ok().body(productMapper.toProductDTO(product));
+        ProductDTO response = service.update(id, product);
+        return ResponseEntity.ok().body(response);
     }
 
 
     @PostMapping(value = "/upload")
     public ResponseEntity<Void> upload(@RequestParam("file") MultipartFile file) throws FileIsEmptyException {
-
         String path = UUID.randomUUID() + "." + service.extractExtension(file.getOriginalFilename());
 
         try {

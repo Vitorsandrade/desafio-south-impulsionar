@@ -1,20 +1,14 @@
 package com.br.vitor.desafio2;
 
-import com.br.vitor.desafio2.dto.ProductDTO;
-import com.br.vitor.desafio2.entity.Product;
-import com.br.vitor.desafio2.resource.ProductController;
-import com.br.vitor.desafio2.service.ProductService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.math.BigDecimal;
-
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
 class Desafio2ApplicationTests {
-//	@Test
-//	void test1() {
-//
-//	}
 
+    @Test
+    void contextLoads() {
+
+    }
 }

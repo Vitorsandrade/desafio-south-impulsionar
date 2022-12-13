@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Builder
+@With
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

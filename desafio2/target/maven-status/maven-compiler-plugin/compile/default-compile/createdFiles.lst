@@ -12,4 +12,6 @@ com\br\vitor\desafio2\resource\ProductController.class
 com\br\vitor\desafio2\dto\ProductDTO.class
 com\br\vitor\desafio2\repository\ProductRepository.class
 com\br\vitor\desafio2\exceptions\InvalidFileException.class
+com\br\vitor\desafio2\entity\Product$ProductBuilder.class
+com\br\vitor\desafio2\dto\ProductDTO$ProductDTOBuilder.class
 com\br\vitor\desafio2\service\ProductService.class
