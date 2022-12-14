@@ -8,7 +8,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentMatchers;
+import org.mockito.BDDMockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -79,7 +82,7 @@ public class productServiceTest {
     }
 
     @Test
-    void testInsertService(){
+    void testInsertService() {
         Product productSave = ProductCreator.createProductWithAllAttributesFakerMinusTheName();
 
         var response = productService.insert(productSave);
@@ -97,17 +100,17 @@ public class productServiceTest {
     }
 
     @Test
-    void testUpdateDataService(){
+    void testUpdateDataService() {
         var p1 = ProductCreator.createProductWithAllAttributesFakerMinusTheName();
         var p2 = ProductCreator.createProductWithAllAttributes();
 
-        productService.updateData(p1,p2);
+        productService.updateData(p1, p2);
 
         Assertions.assertThat(p1.toString()).isEqualTo(p2.toString());
     }
 
     @Test
-    void testExtractExtensionService(){
+    void testExtractExtensionService() {
         String extension = productService.extractExtension("teste.csv");
 
         Assertions.assertThat(extension).isEqualTo("csv");

@@ -2,19 +2,21 @@ package com.br.vitor.desafio2.service;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
+import com.br.vitor.desafio2.exceptions.InvalidFileException;
+import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
 import com.br.vitor.desafio2.mapper.ProductMapper;
 import com.br.vitor.desafio2.repository.ProductRepository;
-import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
-import com.br.vitor.desafio2.exceptions.InvalidFileException;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Files;
@@ -207,4 +209,5 @@ public class ProductService {
 
         return randomString;
     }
+
 }

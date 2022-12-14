@@ -2,9 +2,9 @@ package com.br.vitor.desafio2.resource;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
+import com.br.vitor.desafio2.exceptions.FileIsEmptyException;
 import com.br.vitor.desafio2.mapper.ProductMapper;
 import com.br.vitor.desafio2.service.ProductService;
-import com.br.vitor.desafio2.exceptions.FileIsEmptyException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +25,6 @@ import java.util.UUID;
 @RequestMapping(value = "/api/products")
 public class ProductController {
     private ProductService service;
-    private ProductMapper productMapper;
 
     @GetMapping
     public ResponseEntity<Page<Product>> findAll(Pageable pageable) {
@@ -54,7 +53,6 @@ public class ProductController {
         return ResponseEntity.ok().body(response);
     }
 
-
     @PostMapping(value = "/upload")
     public ResponseEntity<Void> upload(@RequestParam("file") MultipartFile file) throws FileIsEmptyException {
         String path = UUID.randomUUID() + "." + service.extractExtension(file.getOriginalFilename());
@@ -67,8 +65,6 @@ public class ProductController {
         }
 
         return ResponseEntity.ok().build();
-
     }
-
 
 }

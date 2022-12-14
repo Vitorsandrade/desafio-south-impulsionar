@@ -1,7 +1,10 @@
 package com.br.vitor.desafio2.resource;
 
-import com.br.vitor.desafio2.mapper.ProductMapper;
+import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.repository.ProductRepository;
+import com.br.vitor.desafio2.util.ProductCreator;
+import com.google.gson.Gson;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.math.BigDecimal;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -31,15 +36,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProductControllerItTest {
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ProductMapper productMapper;
-
-
-    JacksonJsonParser jsonParser = new JacksonJsonParser();
     @Value("${security.oauth2.client.client-id}")
     private String clientId;
 
+    //@Mock
+    //private ObjectMapper objectMapper;
     @Value("${security.oauth2.client.client-secret}")
     private String clientSecret;
 
@@ -49,11 +50,19 @@ public class ProductControllerItTest {
     private String adminUsername;
     private String adminPassword;
 
+    private Product product;
+
     @BeforeEach
     void setUp() throws Exception {
 
         adminUsername = "admin";
         adminPassword = "12345";
+
+        product = new Product();
+        product.setName("teste");
+        product.setCategory("teste");
+        product.setPrice(new BigDecimal(1000));
+
     }
 
 
@@ -106,11 +115,24 @@ public class ProductControllerItTest {
         String accessToken = obtainAccessToken(adminUsername, adminPassword);
 
         ResultActions result =
-                mockMvc.perform(delete("/api/products/1")
+                mockMvc.perform(get("/api/products/1")
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(MediaType.APPLICATION_JSON));
 
-        result.andExpect(status().isNoContent());
+        result.andExpect(status().isOk());
+    }
+
+    @Test
+    public void testsTheReturnByPassingAnInvalidId() throws Exception {
+
+        String accessToken = obtainAccessToken(adminUsername, adminPassword);
+
+        ResultActions result =
+                mockMvc.perform(get("/api/products/100")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .contentType(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isNotFound());
     }
 
     @Test
@@ -126,7 +148,89 @@ public class ProductControllerItTest {
         result.andExpect(status().isNoContent());
     }
 
+    @Test
+    public void testDeleteReturnByPassingAnInvalidId() throws Exception {
+
+        String accessToken = obtainAccessToken(adminUsername, adminPassword);
+
+        ResultActions result =
+                mockMvc.perform(delete("/api/products/100")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .contentType(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testsTheInsertionMethodPassingValidProduct() throws Exception {
+
+        String accessToken = obtainAccessToken(adminUsername, adminPassword);
+
+        String jsonBody = new Gson().toJson(product);
 
 
+        ResultActions result =
+                mockMvc.perform(post("/api/products")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .content(jsonBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isCreated());
+    }
+
+    @Test
+    void testsTheInsertionMethodPassingInvalidProduct() throws Exception {
+
+        String accessToken = obtainAccessToken(adminUsername, adminPassword);
+
+        String jsonBody = new Gson().toJson(ProductCreator.createProductWithAllAttributesNoName());
+
+
+        ResultActions result =
+                mockMvc.perform(post("/api/products")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .content(jsonBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testsTheUpdateMethodPassingValidProduct() throws Exception {
+
+        String accessToken = obtainAccessToken(adminUsername, adminPassword);
+
+        String jsonBody = new Gson().toJson(product);
+
+
+        ResultActions result =
+                mockMvc.perform(put("/api/products/1")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .content(jsonBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isOk());
+    }
+
+    @Test
+    void testsTheUpdateMethodPassingInvalidProduct() throws Exception {
+
+        String accessToken = obtainAccessToken(adminUsername, adminPassword);
+
+        String jsonBody = new Gson().toJson(ProductCreator.createProductWithAllAttributesNoName());
+
+
+        ResultActions result =
+                mockMvc.perform(put("/api/products/1")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .content(jsonBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isBadRequest());
+    }
 
 }

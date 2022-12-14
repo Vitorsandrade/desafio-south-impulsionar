@@ -2,7 +2,6 @@ package com.br.vitor.desafio2.resource;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
-import com.br.vitor.desafio2.mapper.ProductMapper;
 import com.br.vitor.desafio2.service.ProductService;
 import com.br.vitor.desafio2.util.ProductCreator;
 import com.br.vitor.desafio2.util.ProductDTOCreator;
