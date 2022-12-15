@@ -58,7 +58,7 @@ public class ResourceExceptionHandler {
                                                                        HttpServletRequest request) {
 
         String error = "Fields: name, category and price cannot be null or empty!";
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+        HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(), status.value(), error,
                 e.getMessage(), request.getRequestURI());
 

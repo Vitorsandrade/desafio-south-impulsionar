@@ -3,7 +3,6 @@ package com.br.vitor.desafio2.resource;
 import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.exceptions.FileIsEmptyException;
-import com.br.vitor.desafio2.mapper.ProductMapper;
 import com.br.vitor.desafio2.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
