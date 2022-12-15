@@ -194,7 +194,7 @@ public class ProductControllerItTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
 
-        result.andExpect(status().isBadRequest());
+        result.andExpect(status().isNotFound());
     }
 
     @Test
@@ -230,7 +230,7 @@ public class ProductControllerItTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
 
-        result.andExpect(status().isBadRequest());
+        result.andExpect(status().isNotFound());
     }
 
 }
