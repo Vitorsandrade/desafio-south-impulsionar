@@ -1,0 +1,1 @@
+insert into tb_product (name,price,category,amount,code,bar_code,series,description,color,material) values ('produto teste', 10, 'categoria teste', 1, 'jkdsfhgks', '839467589346','12/22','teste descrição','verde','plastico');
