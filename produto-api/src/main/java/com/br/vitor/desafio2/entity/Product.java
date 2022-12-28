@@ -33,12 +33,10 @@ public class Product implements Serializable {
 
     private String series;
 
-    @NotBlank
     private String name;
 
     private String description;
 
-    @NotNull
     private BigDecimal price;
 
     @Column(name = "manufacturing_date")
@@ -51,7 +49,6 @@ public class Product implements Serializable {
 
     private String material;
 
-    @NotBlank
     private String category;
 
     private Integer amount;

@@ -1,6 +1,7 @@
 package com.br.vitor.desafio2.service;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
+import com.br.vitor.desafio2.dto.RequestProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.exceptions.InvalidFileException;
 import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
@@ -45,16 +46,19 @@ public class ProductService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public ProductDTO insert(Product product) {
-        product.setCode(generateCode());
-        product.setBarCode(generateCodBar());
-        product.setManufacturingDate(LocalDate.now());
-        product.setExpirationDate(null);
+    public ProductDTO insert(RequestProductDTO requestDTO) {
+        ProductDTO productDTO = productMapper.requestToProductDTO(requestDTO);
+        productDTO.setCode(generateCode());
+        productDTO.setBarCode(generateCodBar());
+        productDTO.setManufacturingDate(LocalDate.now());
+        productDTO.setExpirationDate(null);
         String year = String.valueOf(LocalDate.now().getYear());
         String month = String.valueOf(LocalDate.now().getMonthValue());
-        product.setSeries(month + "/" + year);
+        productDTO.setSeries(month + "/" + year);
+
+        Product product = productMapper.productDtoToProduct(productDTO);
         repository.save(product);
-        return productMapper.toProductDTO(product);
+        return productMapper.productToProductDTO(product);
     }
 
     public void delete(Long id) {
@@ -70,7 +74,7 @@ public class ProductService {
             Product entity = repository.getById(id);
             updateData(entity, product);
             repository.save(entity);
-            return productMapper.toProductDTO(entity);
+            return productMapper.productToProductDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }

@@ -3,6 +3,7 @@ services:
   app:
     container_name: app-springboot-south
     image: 'app.jar'
+    restart: always
     build: ./
     ports:
       - "8080:8080"
@@ -16,6 +17,7 @@ services:
   db:
     container_name: db
     image: postgres:13
+    restart: always
     ports:
       - "5435:5432"
     environment:
