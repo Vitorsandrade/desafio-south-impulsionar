@@ -1,25 +1,5 @@
 package com.br.vitor.desafio2.service;
 
-import com.br.vitor.desafio2.entity.Product;
-import com.br.vitor.desafio2.mapper.ProductMapper;
-import com.br.vitor.desafio2.repository.ProductRepository;
-import com.br.vitor.desafio2.util.ProductCreator;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.BDDMockito;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
-import java.util.Optional;
-
 //@ExtendWith(SpringExtension.class)
 public class productServiceTest {
 //

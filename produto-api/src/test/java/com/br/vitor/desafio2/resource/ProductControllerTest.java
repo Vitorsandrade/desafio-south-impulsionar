@@ -1,26 +1,5 @@
 package com.br.vitor.desafio2.resource;
 
-import com.br.vitor.desafio2.dto.ProductDTO;
-import com.br.vitor.desafio2.entity.Product;
-import com.br.vitor.desafio2.service.ProductService;
-import com.br.vitor.desafio2.util.ProductCreator;
-import com.br.vitor.desafio2.util.ProductDTOCreator;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.BDDMockito;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
-
 //@ExtendWith(SpringExtension.class)
 class ProductControllerTest {
 //

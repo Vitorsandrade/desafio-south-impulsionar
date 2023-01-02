@@ -1,11 +1,5 @@
 package com.br.vitor.desafio2.util;
 
-import com.br.vitor.desafio2.entity.Product;
-import com.github.javafaker.Faker;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 public class ProductCreator {
 
 //    public static Product createProductWithAllAttributesNoName() {

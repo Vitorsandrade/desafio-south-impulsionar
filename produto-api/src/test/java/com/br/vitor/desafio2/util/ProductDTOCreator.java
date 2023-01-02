@@ -1,10 +1,5 @@
 package com.br.vitor.desafio2.util;
 
-import com.br.vitor.desafio2.dto.ProductDTO;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 public class ProductDTOCreator {
 
 //    public static ProductDTO createProductDto() {
