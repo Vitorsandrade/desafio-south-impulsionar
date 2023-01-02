@@ -47,16 +47,16 @@ public class ProductService {
     }
 
     public ProductDTO insert(RequestProductDTO requestDTO) {
-        ProductDTO productDTO = productMapper.requestToProductDTO(requestDTO);
-        productDTO.setCode(generateCode());
-        productDTO.setBarCode(generateCodBar());
-        productDTO.setManufacturingDate(LocalDate.now());
-        productDTO.setExpirationDate(null);
+        var product = productMapper.requestToProduct(requestDTO);
+
+        product.setCode(generateCode());
+        product.setBarCode(generateCodBar());
+        product.setManufacturingDate(LocalDate.now());
+        product.setExpirationDate(null);
         String year = String.valueOf(LocalDate.now().getYear());
         String month = String.valueOf(LocalDate.now().getMonthValue());
-        productDTO.setSeries(month + "/" + year);
+        product.setSeries(month + "/" + year);
 
-        Product product = productMapper.productDtoToProduct(productDTO);
         repository.save(product);
         return productMapper.productToProductDTO(product);
     }
@@ -69,10 +69,10 @@ public class ProductService {
         }
     }
 
-    public ProductDTO update(Long id, Product product) {
+    public ProductDTO update(Long id, RequestProductDTO requestDTO) {
         try {
             Product entity = repository.getById(id);
-            updateData(entity, product);
+            updateData(entity, productMapper.requestToProduct(requestDTO));
             repository.save(entity);
             return productMapper.productToProductDTO(entity);
         } catch (EntityNotFoundException e) {
@@ -88,11 +88,6 @@ public class ProductService {
         entity.setName(product.getName());
         entity.setMaterial(product.getMaterial());
         entity.setPrice(product.getPrice());
-        entity.setCode(product.getCode());
-        entity.setBarCode(product.getBarCode());
-        entity.setExpirationDate(product.getExpirationDate());
-        entity.setManufacturingDate(product.getManufacturingDate());
-        entity.setSeries(product.getSeries());
     }
 
     public Product insertFromFile(String code, Product product) {

@@ -48,9 +48,8 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody Product product) {
-        ProductDTO response = service.update(id, product);
-        return ResponseEntity.ok().body(response);
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody RequestProductDTO requestDTO) {
+        return new ResponseEntity<>(service.update(id, requestDTO), HttpStatus.OK);
     }
 
     @PostMapping(value = "/upload")
