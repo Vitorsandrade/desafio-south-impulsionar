@@ -1,12 +1,10 @@
 spring:
-  profiles:
-    active: dev
 
   rabbitmq:
-    host: rabbitmq
     port: 5672
-    username: rabbitmq
-    password: rabbitmq
+    username: ${RABBITMQ_DEFAULT_USER:rabbitmq}
+    password: ${RABBITMQ_DEFAULT_PASS:rabbitmq}
+    virtual-host: /
 
 security:
   oauth2:

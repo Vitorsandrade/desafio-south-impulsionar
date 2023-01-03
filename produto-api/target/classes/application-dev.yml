@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: postgres
-    password: postgres
-    url: jdbc:postgresql://localhost:5435/DB_south
+    url: ${POSTGRES_URL_DB}
+    username: ${USER_POSTGRES}
+    password: ${PASSWORD_POSTGRES}
 
 
   flyway:
@@ -12,4 +12,3 @@ spring:
     locations: classpath:db/migration
     enabled: true
     validate-on-migrate: true
-

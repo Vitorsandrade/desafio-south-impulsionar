@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   app:
     container_name: app-springboot-south
@@ -7,14 +8,14 @@ services:
     build: ./
     ports:
       - "8080:8080"
-    links:
-      - db
-      - rabbitmq
     depends_on:
-      - rabbitmq
       - db
     environment:
       - POSTGRES_URL_DB=jdbc:postgresql://db:5432/DB_south
+      - USER_POSTGRES=postgres
+      - PASSWORD_POSTGRES=postgres
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_RABBITMQ_HOST=rabbitmq
 
   db:
     container_name: db
