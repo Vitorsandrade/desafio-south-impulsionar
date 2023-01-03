@@ -2,9 +2,16 @@ spring:
   profiles:
     active: docker
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+
 security:
   oauth2:
     client:
       scope: password
       client-id: south
       client-secret: 12345
+

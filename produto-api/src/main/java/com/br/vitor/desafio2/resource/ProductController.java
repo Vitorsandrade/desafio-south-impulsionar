@@ -66,4 +66,10 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping(value = "/teste")
+    public ResponseEntity<ProductDTO> teste(@RequestBody @Valid RequestProductDTO requestDTO) {
+
+        return new ResponseEntity<>(service.insert(requestDTO), HttpStatus.CREATED);
+    }
+
 }

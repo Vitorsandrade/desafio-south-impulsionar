@@ -12,3 +12,4 @@ spring:
     locations: classpath:db/migration
     enabled: true
     validate-on-migrate: true
+

@@ -8,6 +8,8 @@ import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
 import com.br.vitor.desafio2.mapper.ProductMapper;
 import com.br.vitor.desafio2.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +37,7 @@ public class ProductService {
 
     private ProductMapper productMapper;
 
+    private RabbitTemplate rabbitTemplate;
 
     public Page<Product> listAll(Pageable pageable) {
         return repository.findAll(pageable);
@@ -58,6 +61,9 @@ public class ProductService {
         product.setSeries(month + "/" + year);
 
         repository.save(product);
+        String routingKey = "PRODUCT_CHANGED";
+        Message message = new Message(product.getId().toString().getBytes());
+        rabbitTemplate.send(routingKey,message);
         return productMapper.productToProductDTO(product);
     }
 
