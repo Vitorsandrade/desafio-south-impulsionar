@@ -1,6 +1,7 @@
 package com.br.vitor.desafio2.service;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
+import com.br.vitor.desafio2.dto.RequestAmountDTO;
 import com.br.vitor.desafio2.dto.RequestProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.exceptions.InvalidFileException;
@@ -60,10 +61,6 @@ public class ProductService {
         String month = String.valueOf(LocalDate.now().getMonthValue());
         product.setSeries(month + "/" + year);
 
-        repository.save(product);
-        String routingKey = "PRODUCT_CHANGED";
-        Message message = new Message(product.getId().toString().getBytes());
-        rabbitTemplate.send(routingKey,message);
         return productMapper.productToProductDTO(product);
     }
 
@@ -155,6 +152,21 @@ public class ProductService {
         }
     }
 
+    public ProductDTO updateAmount(Long id, RequestAmountDTO requestDTO) {
+        try {
+            Product entity = repository.getById(id);
+            entity.setAmount(requestDTO.getAmount());
+            repository.save(entity);
+
+            rabbitTemplate.convertAndSend("PRODUCT_CHANGED",entity.toString());
+            return productMapper.productToProductDTO(entity);
+
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
+    }
+
+
     public static BigDecimal finalValue(String taxValue, String grossValue) {
 
         BigDecimal profitMargin = new BigDecimal("45").divide(new BigDecimal("100")).add(new BigDecimal("1"));
@@ -214,5 +226,6 @@ public class ProductService {
 
         return randomString;
     }
+
 
 }

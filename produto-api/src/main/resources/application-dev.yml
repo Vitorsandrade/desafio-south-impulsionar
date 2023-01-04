@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${POSTGRES_URL_DB}
-    username: ${USER_POSTGRES}
-    password: ${PASSWORD_POSTGRES}
+    url: ${URL_POSTGRES:jdbc:postgresql://localhost:5435/DB_south}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
 
 
   flyway:

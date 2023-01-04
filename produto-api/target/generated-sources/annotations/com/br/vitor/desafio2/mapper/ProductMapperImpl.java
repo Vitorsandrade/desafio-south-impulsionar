@@ -1,6 +1,7 @@
 package com.br.vitor.desafio2.mapper;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
+import com.br.vitor.desafio2.dto.RequestAmountDTO;
 import com.br.vitor.desafio2.dto.RequestProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import javax.annotation.processing.Generated;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-03T16:19:40-0300",
+    date = "2023-01-04T16:49:21-0300",
     comments = "version: 1.5.0.Final, compiler: javac, environment: Java 11.0.12 (Oracle Corporation)"
 )
 @Component
@@ -37,6 +38,19 @@ public class ProductMapperImpl implements ProductMapper {
         productDTO.amount( product.getAmount() );
 
         return productDTO.build();
+    }
+
+    @Override
+    public Product requestAmountToProduct(RequestAmountDTO requestAmountDTO) {
+        if ( requestAmountDTO == null ) {
+            return null;
+        }
+
+        Product.ProductBuilder product = Product.builder();
+
+        product.amount( requestAmountDTO.getAmount() );
+
+        return product.build();
     }
 
     @Override

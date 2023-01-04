@@ -1,6 +1,7 @@
 package com.br.vitor.desafio2.resource;
 
 import com.br.vitor.desafio2.dto.ProductDTO;
+import com.br.vitor.desafio2.dto.RequestAmountDTO;
 import com.br.vitor.desafio2.dto.RequestProductDTO;
 import com.br.vitor.desafio2.entity.Product;
 import com.br.vitor.desafio2.exceptions.FileIsEmptyException;
@@ -66,10 +67,10 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/teste")
-    public ResponseEntity<ProductDTO> teste(@RequestBody @Valid RequestProductDTO requestDTO) {
+    @PutMapping(value = "/amount/{id}")
+    public ResponseEntity<ProductDTO> teste(@PathVariable Long id ,@RequestBody @Valid RequestAmountDTO requestDTO) {
 
-        return new ResponseEntity<>(service.insert(requestDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.updateAmount(id, requestDTO), HttpStatus.OK);
     }
 
 }

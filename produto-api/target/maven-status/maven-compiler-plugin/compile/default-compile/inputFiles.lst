@@ -6,6 +6,7 @@ C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vi
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\repository\ProductRepository.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\config\RabbitMQConfig.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\entity\Product.java
+C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\dto\RequestAmountDTO.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\handler\ResourceExceptionHandler.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\handler\StandardError.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\dto\RequestProductDTO.java
