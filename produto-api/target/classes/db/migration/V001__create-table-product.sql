@@ -2,7 +2,8 @@ CREATE TABLE tb_product (
 
     id SERIAL PRIMARY KEY,
     name VARCHAR(60),
-    price NUMERIC,
+    price MONEY,
+    tax NUMERIC,
     category VARCHAR,
     code varchar,
     bar_code INT,
@@ -12,4 +13,5 @@ CREATE TABLE tb_product (
     description varchar(200),
     color varchar,
     material varchar
+
 );

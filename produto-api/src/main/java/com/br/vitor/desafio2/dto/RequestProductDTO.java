@@ -22,5 +22,6 @@ public class RequestProductDTO {
     private String material;
     @NotBlank
     private String category;
-    private Integer amount;
+    @NotNull
+    private BigDecimal tax;
 }

@@ -1,6 +1,7 @@
 package com.br.vitor.desafio2.handler;
 
 import com.br.vitor.desafio2.exceptions.FileIsEmptyException;
+import com.br.vitor.desafio2.exceptions.InvalidCodeException;
 import com.br.vitor.desafio2.exceptions.InvalidFileException;
 import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -57,7 +58,20 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> handlerMethodArgumentNotValid(MethodArgumentNotValidException e,
                                                                        HttpServletRequest request) {
 
-        String error = "Fields: name, category and price cannot be null or empty!";
+        String error = "Fields: name, category, price and tax cannot be null or empty!";
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(LocalDateTime.now(), status.value(), error,
+                e.getMessage(), request.getRequestURI());
+
+        return ResponseEntity.status(status).body(err);
+
+    }
+
+    @ExceptionHandler(InvalidCodeException.class)
+    public ResponseEntity<StandardError> handlerInvalidCode(InvalidCodeException e,
+                                                                       HttpServletRequest request) {
+
+        String error = "Invalid Code!";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError err = new StandardError(LocalDateTime.now(), status.value(), error,
                 e.getMessage(), request.getRequestURI());

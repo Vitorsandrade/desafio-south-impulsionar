@@ -19,6 +19,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
+    private BigDecimal tax;
     private LocalDate manufacturingDate;
     private LocalDate expirationDate;
     private String color;

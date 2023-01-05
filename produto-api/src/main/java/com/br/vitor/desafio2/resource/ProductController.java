@@ -67,10 +67,10 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(value = "/amount/{id}")
-    public ResponseEntity<ProductDTO> teste(@PathVariable Long id ,@RequestBody @Valid RequestAmountDTO requestDTO) {
+    @PutMapping(value = "/amount/{code}")
+    public ResponseEntity<ProductDTO> teste(@PathVariable String code ,@RequestBody @Valid RequestAmountDTO requestDTO) {
 
-        return new ResponseEntity<>(service.updateAmount(id, requestDTO), HttpStatus.OK);
+        return new ResponseEntity<>(service.updateAmount(code, requestDTO), HttpStatus.OK);
     }
 
 }

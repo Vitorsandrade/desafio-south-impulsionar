@@ -4,6 +4,7 @@ import com.br.vitor.desafio2.dto.ProductDTO;
 import com.br.vitor.desafio2.dto.RequestAmountDTO;
 import com.br.vitor.desafio2.dto.RequestProductDTO;
 import com.br.vitor.desafio2.entity.Product;
+import com.br.vitor.desafio2.exceptions.InvalidCodeException;
 import com.br.vitor.desafio2.exceptions.InvalidFileException;
 import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
 import com.br.vitor.desafio2.mapper.ProductMapper;
@@ -60,7 +61,9 @@ public class ProductService {
         String year = String.valueOf(LocalDate.now().getYear());
         String month = String.valueOf(LocalDate.now().getMonthValue());
         product.setSeries(month + "/" + year);
+        product.setAmount(0);
 
+        repository.save(product);
         return productMapper.productToProductDTO(product);
     }
 
@@ -100,6 +103,7 @@ public class ProductService {
             }
             Product entity = repository.getByCode(code);
             updateData(entity, product);
+            entity.setAmount(0);
 
             return repository.save(entity);
         } catch (EntityNotFoundException e) {
@@ -134,7 +138,7 @@ public class ProductService {
 
                 Product product = Product.builder().id(null).code(data[0]).barCode(data[1]).series(data[2]).name(data[3])
                         .description(data[4]).price(price).manufacturingDate(manufacturingDate).expirationDate(expirationDate)
-                        .color(data[10]).material(data[11]).category(data[5]).amount(Integer.parseInt(data[12])).build();
+                        .color(data[10]).material(data[11]).category(data[5]).build();
 
                 insertFromFile(data[0], product);
 
@@ -152,9 +156,9 @@ public class ProductService {
         }
     }
 
-    public ProductDTO updateAmount(Long id, RequestAmountDTO requestDTO) {
+    public ProductDTO updateAmount(String code, RequestAmountDTO requestDTO) {
         try {
-            Product entity = repository.getById(id);
+            Product entity = repository.getByCode(code);
             entity.setAmount(requestDTO.getAmount());
             repository.save(entity);
 
@@ -162,7 +166,9 @@ public class ProductService {
             return productMapper.productToProductDTO(entity);
 
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
+            throw new InvalidCodeException(code);
+        }catch (NullPointerException e){
+            throw new InvalidCodeException(code);
         }
     }
 
