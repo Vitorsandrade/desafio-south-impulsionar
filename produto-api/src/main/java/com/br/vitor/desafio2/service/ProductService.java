@@ -62,6 +62,7 @@ public class ProductService {
         String month = String.valueOf(LocalDate.now().getMonthValue());
         product.setSeries(month + "/" + year);
         product.setAmount(0);
+        product.setPrice(finalValue(product.getTax(),product.getPrice()));
 
         repository.save(product);
         return productMapper.productToProductDTO(product);
@@ -124,7 +125,8 @@ public class ProductService {
                 data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
 
-                BigDecimal price = finalValue(data[7], data[6]);
+                BigDecimal price = finalValue(new BigDecimal(data[7].replace(",", ".").replace("\"", ""))
+                        , new BigDecimal(data[6].replace(",", ".").replace("\"", "")));
 
                 DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -173,15 +175,16 @@ public class ProductService {
     }
 
 
-    public static BigDecimal finalValue(String taxValue, String grossValue) {
+    public static BigDecimal finalValue(BigDecimal taxValue, BigDecimal grossValue) {
 
-        BigDecimal profitMargin = new BigDecimal("45").divide(new BigDecimal("100")).add(new BigDecimal("1"));
+        BigDecimal profitMargin = new BigDecimal("45").divide(new BigDecimal("100"));
 
-        BigDecimal tax = new BigDecimal(taxValue.replace(",", ".").replace("\"", "")).divide(new BigDecimal("100"))
-                .add(new BigDecimal("1"));
+        BigDecimal tax = new BigDecimal(String.valueOf(taxValue)).divide(new BigDecimal("100"));
 
-        BigDecimal price = new BigDecimal(grossValue.replace(",", ".").replace("\"", "")).multiply(tax)
-                .multiply(profitMargin).setScale(2, RoundingMode.CEILING);
+        BigDecimal priceWithTax = new BigDecimal(String.valueOf(grossValue)).multiply(tax).add(grossValue);
+
+        BigDecimal price = new BigDecimal(String.valueOf(priceWithTax)).multiply(profitMargin)
+                .add(priceWithTax).setScale(2, RoundingMode.CEILING);
 
         return price;
     }
