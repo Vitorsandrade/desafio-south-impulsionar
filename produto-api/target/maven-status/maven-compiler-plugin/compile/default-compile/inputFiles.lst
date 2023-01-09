@@ -1,10 +1,10 @@
+C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\rabbitmq\Consumer.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\ProdutoApiApplication.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\exceptions\InvalidFileException.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\exceptions\ResourceNotFoundException.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\mapper\ProductMapper.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\config\SecurityConfig.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\repository\ProductRepository.java
-C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\config\RabbitMQConfig.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\entity\Product.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\dto\RequestAmountDTO.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\handler\ResourceExceptionHandler.java
@@ -12,6 +12,7 @@ C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vi
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\dto\RequestProductDTO.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\dto\ProductDTO.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\service\ProductService.java
+C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\rabbitmq\RabbitMQConfig.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\resource\ProductController.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\exceptions\FileIsEmptyException.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\desafio2\exceptions\InvalidCodeException.java

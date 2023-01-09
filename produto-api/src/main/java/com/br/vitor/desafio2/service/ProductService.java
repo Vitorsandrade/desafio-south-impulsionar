@@ -8,10 +8,13 @@ import com.br.vitor.desafio2.exceptions.InvalidCodeException;
 import com.br.vitor.desafio2.exceptions.InvalidFileException;
 import com.br.vitor.desafio2.exceptions.ResourceNotFoundException;
 import com.br.vitor.desafio2.mapper.ProductMapper;
+import com.br.vitor.desafio2.rabbitmq.RabbitMqConfig;
 import com.br.vitor.desafio2.repository.ProductRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,8 +41,11 @@ public class ProductService {
     private ProductRepository repository;
 
     private ProductMapper productMapper;
-
+    @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public Page<Product> listAll(Pageable pageable) {
         return repository.findAll(pageable);
@@ -62,7 +68,7 @@ public class ProductService {
         String month = String.valueOf(LocalDate.now().getMonthValue());
         product.setSeries(month + "/" + year);
         product.setAmount(0);
-        product.setPrice(finalValue(product.getTax(),product.getPrice()));
+        product.setPrice(finalValue(product.getTax(), product.getPrice()));
 
         repository.save(product);
         return productMapper.productToProductDTO(product);
@@ -158,22 +164,32 @@ public class ProductService {
         }
     }
 
-    public ProductDTO updateAmount(String code, RequestAmountDTO requestDTO) {
+    public void sendMessageUpdateAmount(String code, RequestAmountDTO requestDTO) {
         try {
             Product entity = repository.getByCode(code);
+            if(requestDTO.getAmount() < 0){
+                requestDTO.setAmount(0);
+            }
             entity.setAmount(requestDTO.getAmount());
-            repository.save(entity);
 
-            rabbitTemplate.convertAndSend("PRODUCT_CHANGED",entity.toString());
-            return productMapper.productToProductDTO(entity);
+            sendRabbitMessage(RabbitMqConfig.exchange, RabbitMqConfig.routingKey, productMapper.productToProductDTO(entity), "PRODUCT_CHANGED");
 
         } catch (EntityNotFoundException e) {
             throw new InvalidCodeException(code);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             throw new InvalidCodeException(code);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    public void sendRabbitMessage(String exchange, String routingKey, ProductDTO productDTO, String header) throws JsonProcessingException {
+        String request = objectMapper.writeValueAsString(productDTO);
+        rabbitTemplate.convertAndSend(exchange, routingKey, request, message -> {
+            message.getMessageProperties().setHeader("EVENT", header);
+            return message;
+        });
+    }
 
     public static BigDecimal finalValue(BigDecimal taxValue, BigDecimal grossValue) {
 

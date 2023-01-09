@@ -10,8 +10,9 @@ import org.mapstruct.Mapper;
 public interface ProductMapper {
 
     ProductDTO productToProductDTO(Product product);
-
     Product requestAmountToProduct(RequestAmountDTO requestAmountDTO);
     Product requestToProduct(RequestProductDTO requestProductDTO);
+
+    Product productDTOToProduct(ProductDTO productDTO);
 
 }

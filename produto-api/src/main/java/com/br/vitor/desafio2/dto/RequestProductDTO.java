@@ -1,8 +1,6 @@
 package com.br.vitor.desafio2.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,6 +9,8 @@ import java.math.BigDecimal;
 @Data
 @Builder
 @With
+@AllArgsConstructor
+@NoArgsConstructor
 public class RequestProductDTO {
 
     @NotBlank

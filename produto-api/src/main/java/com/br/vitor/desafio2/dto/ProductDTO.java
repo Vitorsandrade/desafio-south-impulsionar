@@ -1,8 +1,6 @@
 package com.br.vitor.desafio2.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,6 +8,8 @@ import java.time.LocalDate;
 @Data
 @Builder
 @With
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
 
     private Long id;

@@ -5,6 +5,7 @@ com\br\vitor\desafio2\dto\RequestProductDTO.class
 com\br\vitor\desafio2\resource\ProductController.class
 com\br\vitor\desafio2\dto\ProductDTO.class
 com\br\vitor\desafio2\exceptions\InvalidFileException.class
+com\br\vitor\desafio2\rabbitmq\RabbitMQConfig.class
 com\br\vitor\desafio2\service\ProductService.class
 com\br\vitor\desafio2\exceptions\InvalidCodeException.class
 com\br\vitor\desafio2\exceptions\FileIsEmptyException.class
@@ -16,7 +17,7 @@ com\br\vitor\desafio2\handler\StandardError.class
 com\br\vitor\desafio2\mapper\ProductMapper.class
 com\br\vitor\desafio2\handler\StandardError$StandardErrorBuilder.class
 com\br\vitor\desafio2\repository\ProductRepository.class
-com\br\vitor\desafio2\config\RabbitMQConfig.class
 com\br\vitor\desafio2\dto\RequestProductDTO$RequestProductDTOBuilder.class
 com\br\vitor\desafio2\entity\Product$ProductBuilder.class
 com\br\vitor\desafio2\dto\ProductDTO$ProductDTOBuilder.class
+com\br\vitor\desafio2\rabbitmq\Consumer.class
