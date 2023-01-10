@@ -4,8 +4,8 @@ com\br\vitor\desafio2\ProdutoApiApplication.class
 com\br\vitor\desafio2\dto\RequestProductDTO.class
 com\br\vitor\desafio2\resource\ProductController.class
 com\br\vitor\desafio2\dto\ProductDTO.class
+com\br\vitor\desafio2\rabbitmq\RabbitMqConfig.class
 com\br\vitor\desafio2\exceptions\InvalidFileException.class
-com\br\vitor\desafio2\rabbitmq\RabbitMQConfig.class
 com\br\vitor\desafio2\service\ProductService.class
 com\br\vitor\desafio2\exceptions\InvalidCodeException.class
 com\br\vitor\desafio2\exceptions\FileIsEmptyException.class

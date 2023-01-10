@@ -167,7 +167,7 @@ public class ProductService {
     public void sendMessageUpdateAmount(String code, RequestAmountDTO requestDTO) {
         try {
             Product entity = repository.getByCode(code);
-            if(requestDTO.getAmount() < 0){
+            if(requestDTO.getAmount() <= 0){
                 requestDTO.setAmount(0);
             }
             entity.setAmount(requestDTO.getAmount());
