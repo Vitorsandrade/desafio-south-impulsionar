@@ -1,6 +1,6 @@
-com\br\vitor\desafio2\resource\ProductControllerItTest.class
-com\br\vitor\desafio2\ProdutoApiApplicationTests.class
-com\br\vitor\desafio2\util\ProductDTOCreator.class
-com\br\vitor\desafio2\service\productServiceTest.class
-com\br\vitor\desafio2\resource\ProductControllerTest.class
-com\br\vitor\desafio2\util\ProductCreator.class
+com\br\vitor\produtoApi\resource\ProductControllerTest.class
+com\br\vitor\produtoApi\ProdutoApiApplicationTests.class
+com\br\vitor\produtoApi\util\ProductCreator.class
+com\br\vitor\produtoApi\service\productServiceTest.class
+com\br\vitor\produtoApi\resource\ProductControllerItTest.class
+com\br\vitor\produtoApi\util\ProductDTOCreator.class

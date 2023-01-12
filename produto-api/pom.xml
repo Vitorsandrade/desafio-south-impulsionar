@@ -123,6 +123,11 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -162,7 +167,7 @@
             </plugin>
 
         </plugins>
-        <finalName>projeto-south-vitor</finalName>
+
     </build>
 
 </project>

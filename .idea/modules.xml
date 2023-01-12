@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/desafio2-south.iml" filepath="$PROJECT_DIR$/.idea/desafio2-south.iml" />
+      <module fileurl="file://$PROJECT_DIR$/produto-api/produto-api.iml" filepath="$PROJECT_DIR$/produto-api/produto-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/produto-producer-api/produto-producer-api.iml" filepath="$PROJECT_DIR$/produto-producer-api/produto-producer-api.iml" />
     </modules>
   </component>
 </project>
