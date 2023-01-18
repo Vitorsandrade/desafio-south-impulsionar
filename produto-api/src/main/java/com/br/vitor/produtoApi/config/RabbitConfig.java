@@ -1,4 +1,4 @@
-package com.br.vitor.produtoApi.rabbitmq;
+package com.br.vitor.produtoApi.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;

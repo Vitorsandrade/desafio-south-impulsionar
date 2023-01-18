@@ -38,8 +38,6 @@ public class ProductControllerItTest {
     @Value("${security.oauth2.client.client-id}")
     private String clientId;
 
-    //@Mock
-    //private ObjectMapper objectMapper;
     @Value("${security.oauth2.client.client-secret}")
     private String clientSecret;
 
@@ -81,6 +79,7 @@ public class ProductControllerItTest {
         String resultString = result.andReturn().getResponse().getContentAsString();
 
         JacksonJsonParser jsonParser = new JacksonJsonParser();
+        String p  = jsonParser.parseMap(resultString).get("access_token").toString();
         return jsonParser.parseMap(resultString).get("access_token").toString();
     }
 

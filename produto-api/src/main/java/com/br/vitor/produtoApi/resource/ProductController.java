@@ -27,12 +27,12 @@ import java.util.UUID;
 public class ProductController {
     private ProductService service;
 
-    @GetMapping
+    @GetMapping("/get/all")
     public ResponseEntity<Page<Product>> findAll(Pageable pageable) {
         return ResponseEntity.ok(service.listAll(pageable));
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/get/{id}")
     public ResponseEntity<Product> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }

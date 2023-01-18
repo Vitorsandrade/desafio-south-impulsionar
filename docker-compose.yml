@@ -18,13 +18,13 @@ services:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_RABBITMQ_HOST=rabbitmq
 
-  producer:
-    container_name: producer-app
-    image: 'producer-app.jar'
-    restart: always
-    build: produto-producer-api
-    ports:
-      - "8081:8081"
+#  producer:
+#    container_name: producer-app
+#    image: 'producer-app.jar'
+#    restart: always
+#    build: produto-producer-api
+#    ports:
+#      - "8081:8081"
 
   db:
     container_name: db

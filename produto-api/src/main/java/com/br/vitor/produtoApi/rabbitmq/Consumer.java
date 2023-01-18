@@ -1,8 +1,8 @@
 package com.br.vitor.produtoApi.rabbitmq;
 
+import com.br.vitor.produtoApi.config.RabbitConfig;
 import com.br.vitor.produtoApi.dto.ProductDTO;
 import com.br.vitor.produtoApi.entity.Product;
-import com.br.vitor.produtoApi.exceptions.ResourceNotFoundException;
 import com.br.vitor.produtoApi.mapper.ProductMapper;
 import com.br.vitor.produtoApi.repository.ProductRepository;
 import com.br.vitor.produtoApi.service.ProductService;
@@ -10,12 +10,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.Objects;
 
 
@@ -59,6 +57,8 @@ public class Consumer {
                 ProductDTO productToUpdate = mapper.readValue(payload.getPayload(), ProductDTO.class);
                 service.update(productToUpdate.getId(), productMapper.productDTOToRequestDTO(productToUpdate));
                 log.info("product id " + productToUpdate.getId() + " updated!");
+                break;
+            case "teste":
                 break;
         } }catch (Exception e){
             log.error(e.getMessage());

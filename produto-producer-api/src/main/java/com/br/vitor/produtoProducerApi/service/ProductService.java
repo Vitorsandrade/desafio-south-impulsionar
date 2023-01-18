@@ -17,6 +17,7 @@ public class ProductService {
     @Autowired
     ObjectMapper mapper;
 
+
     public void sendMessageInsertProduct(RequestProductDTO requestDTO) {
         try {
 
@@ -33,7 +34,7 @@ public class ProductService {
         sendRabbitMessageId(RabbitConfig.exchange, RabbitConfig.routingKey, id, "DELETE");
     }
 
-    public void sendMessageUpdateProduct(Long id, RequestProductDTO requestDTO){
+    public void sendMessageUpdateProduct(Long id, RequestProductDTO requestDTO) {
         requestDTO.setId(id);
         try {
 

@@ -5,7 +5,6 @@ C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vi
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\exceptions\InvalidCodeException.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\dto\ProductDTO.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\exceptions\InvalidFileException.java
-C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\rabbitmq\RabbitConfig.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\dto\RequestProductDTO.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\handler\StandardError.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\exceptions\FileIsEmptyException.java
@@ -13,6 +12,7 @@ C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vi
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\entity\Product.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\dto\RequestAmountDTO.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\rabbitmq\Consumer.java
+C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\config\RabbitConfig.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\mapper\ProductMapper.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\ProdutoApiApplication.java
 C:\Users\vitor\projetos south\desafio2-south\produto-api\src\main\java\com\br\vitor\produtoApi\repository\ProductRepository.java

@@ -10,6 +10,7 @@ com\br\vitor\produtoApi\dto\RequestProductDTO$RequestProductDTOBuilder.class
 com\br\vitor\produtoApi\entity\Product$ProductBuilder.class
 com\br\vitor\produtoApi\dto\RequestAmountDTO.class
 com\br\vitor\produtoApi\mapper\ProductMapper.class
+com\br\vitor\produtoApi\config\RabbitConfig.class
 com\br\vitor\produtoApi\entity\Product.class
 com\br\vitor\produtoApi\rabbitmq\Consumer.class
 com\br\vitor\produtoApi\dto\ProductDTO$ProductDTOBuilder.class
@@ -19,5 +20,4 @@ com\br\vitor\produtoApi\handler\StandardError.class
 com\br\vitor\produtoApi\handler\ResourceExceptionHandler.class
 com\br\vitor\produtoApi\mapper\ProductMapperImpl.class
 com\br\vitor\produtoApi\service\ProductService.class
-com\br\vitor\produtoApi\rabbitmq\RabbitConfig.class
 com\br\vitor\produtoApi\exceptions\ResourceNotFoundException.class

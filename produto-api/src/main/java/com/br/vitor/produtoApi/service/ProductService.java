@@ -8,7 +8,7 @@ import com.br.vitor.produtoApi.exceptions.InvalidCodeException;
 import com.br.vitor.produtoApi.exceptions.InvalidFileException;
 import com.br.vitor.produtoApi.exceptions.ResourceNotFoundException;
 import com.br.vitor.produtoApi.mapper.ProductMapper;
-import com.br.vitor.produtoApi.rabbitmq.RabbitConfig;
+import com.br.vitor.produtoApi.config.RabbitConfig;
 import com.br.vitor.produtoApi.repository.ProductRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -100,6 +100,7 @@ public class ProductService {
         entity.setName(product.getName());
         entity.setMaterial(product.getMaterial());
         entity.setPrice(finalValue(product.getTax(), product.getPrice()));
+        entity.setTax(product.getTax());
     }
 
     public Product insertFromFile(String code, Product product) {
@@ -254,7 +255,7 @@ public class ProductService {
     public void queue() throws JsonProcessingException {
         String request = objectMapper.writeValueAsString(new Product());
         rabbitTemplate.convertAndSend(RabbitConfig.exchange, RabbitConfig.routingKey, request, message -> {
-            message.getMessageProperties().setHeader("EVENT", "PRODUCT_CHANGED");
+            message.getMessageProperties().setHeader("EVENT", "teste");
             return message;
         });
     }
