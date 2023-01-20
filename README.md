@@ -4,17 +4,15 @@
   <img align="center" alt="Vitor-Spring" height="60" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain-wordmark.svg">
 </div>
 
-# desafio2-south
+# Desafio 3 South System
 
 API para gerenciar os dados de Produtos. É possível fazer a inclusão, alteração, consulta, listagem, importação e exclusão de Produtos.
 Neste projeto mostraremos como armazenar Produtos no postgreSQL.
 
 ## Iniciar a aplicação
 - Clone o repositório para sua máquina local.
-- Importe a aplicação na sua IDE.
 - Abra o terminal pela sua IDE ou pelo seu Sistema Operacional(mas se direciona ao diretório do projeto clonado).
-- Utilize o comando: **mvn clean install** (Para ser realizado o build do projeto).
-- Ainda no terminal utilize o comando: **docker-compose up -d** (para ser criado a imagem com e o container tanto do banco de dados(PostgreSQL) quanto da aplicação).
+- Ainda no terminal utilize o comando: **docker-compose up -d** (para serem criadas as imagens e os containers).
 - Para certificar conexão com banco de dados utilize o DBeaver passando as seguintes informações:
   - Host: localhost
   - Port: 5435
@@ -22,25 +20,25 @@ Neste projeto mostraremos como armazenar Produtos no postgreSQL.
   - Username: postgres
   - Password: postgres
 
-## Testes com Postman
-- Primeiro importe no seu Postman a coleção: **Desafio 2.postman_collection.json** que foi passado dentro do diretório do proejto.
+## Testes com Postman(Aplicação Product API)
+- Primeiro importe no seu Postman a coleção: **South System Desafio 3.postman_collection.json** que foi passado dentro do diretório do proejto.
 - A aplicação contém uma camada de segurança e foi utilizado o protocolo OAuth2, logo, as requisições da API exigem um token de segurança.
 - Para conseguir o token vá na requisição **POST - token** da sua coleção, e copie o conteúdo que foi passado no campo "access_token" como mostra abaixo:
 
-![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/access_token.png)
+![alt text](https://github.com/Vitorsandrade/desafio-south-impulsionar/blob/main/images/access_token.png)
 
 - para utilização de qualquer uma das requisições informe o token de acesso na aba **Authorization** da requisição, utilize o type **Bearer Token**
-e informe o token que foi passado:
+e informe o token que foi passado:(Válido apenas para a Prodcut Api)
 
-![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/token_requisi%C3%A7%C3%A3o.png)
+![alt text](https://github.com/Vitorsandrade/desafio-south-impulsionar/blob/main/images/token_requisi%C3%A7%C3%A3o.png)
 
 ## Requisições
 
 #### POST - product
 - Esta requisição serve para inserção de novos produtos.
-- informe no body todos atributos do produto que irá cadastrar(Os campos Id, code e barCode serão gerados automaticamentes na inserção do produto):
+- informe no body todos atributos do produto que irá cadastrar(Os campos Id, code,barCode e series serão gerados automaticamentes na inserção do produto):
 
-![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/Post%20-%20product.png)
+![alt text](https://github.com/Vitorsandrade/desafio-south-impulsionar/blob/main/images/Post%20-%20product.png)
 
 #### GET ALL - products
 - Esta requisição serve para listar dos os produtos que estão no seu banco.
@@ -57,12 +55,26 @@ e informe o token que foi passado:
 
 #### IMPORT - products
 - Esta requisição serve para importar arquivos .csv  que contém produtos passados no padrão:
-  - código,codigo de barras,série,nome,descrição,categoria,valor bruto,impostos (%),data de fabricação,data de validade,cor,material,quantidade
+  - código,codigo de barras,série,nome,descrição,categoria,valor bruto,impostos (%),data de fabricação,data de validade,cor,material
 - Pode ser usado o arquivo mostruario_fabrica.csv que está dentro da pasta do projeto para importar tais produtos.
 - Também pode ser passado qualquer outro arquivo .csv com o mesmo padrão.
 - Iforme o arquivo desejado na aba body e selecionando a opção form-data passando a chave **file** e o valor seria seu determinado arquivo:
 
-![alt text](https://github.com/Vitorsandrade/desafio2-south/blob/main/desafio2/images/Import%20-%20products.png)
+![alt text](https://github.com/Vitorsandrade/desafio-south-impulsionar/blob/main/images/Import%20-%20products.png)
 
+## Testes com Postman(Aplicação Product Producer API)
 
+## Requisições
 
+#### BONUS POST
+- Esta requisição envia uma mensagem através do rabbitmq, o consumidor irá fazer a leitura da mensagem e inserir um novo produto com os atrbutos que foram passados
+no corpo da requisição.
+
+#### BONUS GET ALL
+- 
+#### BONUS GET BY ID
+
+#### BONUS DELETE
+- Esta requisição envia uma mensagem através do rabbitmq, o consumidor irá fazer a leitura da mensagem e deletar um produto de id igual ao que foi passado no parametro da requisição.
+#### BONUS PUT
+- Esta requisição envia uma mensagem através do rabbitmq, o consumidor irá fazer a leitura da mensagem e atualizar de id igual ao que foi passado no parametro da requisição.
