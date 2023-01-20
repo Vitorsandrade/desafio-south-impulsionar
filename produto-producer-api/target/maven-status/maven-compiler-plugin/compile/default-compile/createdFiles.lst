@@ -1,0 +1,10 @@
+com\br\vitor\produtoProducerApi\entity\Product$ProductBuilder.class
+com\br\vitor\produtoProducerApi\resource\ProductController.class
+com\br\vitor\produtoProducerApi\service\ProductService$1.class
+com\br\vitor\produtoProducerApi\service\ProductService.class
+com\br\vitor\produtoProducerApi\dto\RequestProductDTO$RequestProductDTOBuilder.class
+com\br\vitor\produtoProducerApi\entity\Product.class
+com\br\vitor\produtoProducerApi\service\PageableResponse.class
+com\br\vitor\produtoProducerApi\ProdutoProducerApiApplication.class
+com\br\vitor\produtoProducerApi\configs\RabbitConfig.class
+com\br\vitor\produtoProducerApi\dto\RequestProductDTO.class
