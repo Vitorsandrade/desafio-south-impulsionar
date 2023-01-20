@@ -71,9 +71,9 @@ e informe o token que foi passado:(Válido apenas para a Prodcut Api)
 no corpo da requisição.
 
 #### BONUS GET ALL
-- 
+- Esta requisação retorna todos os produtos através de RestTemplate.
 #### BONUS GET BY ID
-
+- Esta requisição retorna um produto buscando por id através de RestTemplate.
 #### BONUS DELETE
 - Esta requisição envia uma mensagem através do rabbitmq, o consumidor irá fazer a leitura da mensagem e deletar um produto de id igual ao que foi passado no parametro da requisição.
 #### BONUS PUT
