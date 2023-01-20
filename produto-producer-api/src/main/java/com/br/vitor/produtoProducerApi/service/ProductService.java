@@ -1,7 +1,7 @@
 package com.br.vitor.produtoProducerApi.service;
 
+import com.br.vitor.produtoProducerApi.configs.RabbitConfig;
 import com.br.vitor.produtoProducerApi.dto.RequestProductDTO;
-import com.br.vitor.produtoProducerApi.rabbitmq.RabbitConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,7 +13,6 @@ public class ProductService {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
-
     @Autowired
     ObjectMapper mapper;
 
@@ -61,6 +60,5 @@ public class ProductService {
             return message;
         });
     }
-
 
 }

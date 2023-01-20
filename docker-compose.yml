@@ -5,7 +5,7 @@ services:
     container_name: product-app
     image: 'app.jar'
     restart: always
-    build: produto-api
+    build: ./produto-api
     ports:
       - "8080:8080"
     depends_on:
@@ -17,14 +17,25 @@ services:
       - POSTGRES_PASSWORD=postgres
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
 
-#  producer:
-#    container_name: producer-app
-#    image: 'producer-app.jar'
-#    restart: always
-#    build: produto-producer-api
-#    ports:
-#      - "8081:8081"
+  producer:
+    container_name: producer-app
+    image: 'producer-app.jar'
+    restart: always
+    build: ./produto-producer-api
+    ports:
+      - "8081:8081"
+    depends_on:
+      - app
+      - rabbitmq
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
+      - PRODUTO_APP=product-app
+
 
   db:
     container_name: db
