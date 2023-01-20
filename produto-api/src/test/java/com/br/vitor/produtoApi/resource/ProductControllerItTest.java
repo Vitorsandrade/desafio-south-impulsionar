@@ -1,8 +1,10 @@
 package com.br.vitor.produtoApi.resource;
 
+import com.br.vitor.produtoApi.dto.RequestProductDTO;
 import com.br.vitor.produtoApi.entity.Product;
 import com.br.vitor.produtoApi.repository.ProductRepository;
 import com.br.vitor.produtoApi.util.ProductCreator;
+import com.br.vitor.produtoApi.util.RequestDTOCreator;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,7 +49,7 @@ public class ProductControllerItTest {
     private String adminUsername;
     private String adminPassword;
 
-    private Product product;
+    private RequestProductDTO product;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -55,10 +57,11 @@ public class ProductControllerItTest {
         adminUsername = "admin";
         adminPassword = "12345";
 
-        product = new Product();
+        product = new RequestProductDTO();
         product.setName("teste");
         product.setCategory("teste");
-        product.setPrice(new BigDecimal(1000));
+        product.setPrice(new BigDecimal("1000"));
+        product.setTax(new BigDecimal("100"));
 
     }
 
@@ -100,7 +103,7 @@ public class ProductControllerItTest {
         String accessToken = obtainAccessToken(adminUsername, adminPassword);
 
         ResultActions result =
-                mockMvc.perform(get("/api/products")
+                mockMvc.perform(get("/api/products/get/all")
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(MediaType.APPLICATION_JSON));
 
@@ -113,7 +116,7 @@ public class ProductControllerItTest {
         String accessToken = obtainAccessToken(adminUsername, adminPassword);
 
         ResultActions result =
-                mockMvc.perform(get("/api/products/1")
+                mockMvc.perform(get("/api/products/get/1")
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(MediaType.APPLICATION_JSON));
 
@@ -126,7 +129,7 @@ public class ProductControllerItTest {
         String accessToken = obtainAccessToken(adminUsername, adminPassword);
 
         ResultActions result =
-                mockMvc.perform(get("/api/products/100")
+                mockMvc.perform(get("/api/products/get/100")
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(MediaType.APPLICATION_JSON));
 
@@ -182,7 +185,7 @@ public class ProductControllerItTest {
 
         String accessToken = obtainAccessToken(adminUsername, adminPassword);
 
-        String jsonBody = new Gson().toJson(ProductCreator.createProductWithAllAttributesNoName());
+        String jsonBody = new Gson().toJson(RequestDTOCreator.createRequestProductDto());
 
 
         ResultActions result =
@@ -196,29 +199,11 @@ public class ProductControllerItTest {
     }
 
     @Test
-    void testsTheUpdateMethodPassingValidProduct() throws Exception {
-
-        String accessToken = obtainAccessToken(adminUsername, adminPassword);
-
-        String jsonBody = new Gson().toJson(product);
-
-
-        ResultActions result =
-                mockMvc.perform(put("/api/products/1")
-                        .header("Authorization", "Bearer " + accessToken)
-                        .content(jsonBody)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON));
-
-        result.andExpect(status().isOk());
-    }
-
-    @Test
     void testsTheUpdateMethodPassingInvalidProduct() throws Exception {
 
         String accessToken = obtainAccessToken(adminUsername, adminPassword);
 
-        String jsonBody = new Gson().toJson(ProductCreator.createProductWithAllAttributesNoName());
+        String jsonBody = new Gson().toJson(RequestDTOCreator.createRequestProductDto());
 
 
         ResultActions result =

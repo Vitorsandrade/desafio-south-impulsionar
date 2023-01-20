@@ -69,7 +69,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(InvalidCodeException.class)
     public ResponseEntity<StandardError> handlerInvalidCode(InvalidCodeException e,
-                                                                       HttpServletRequest request) {
+                                                            HttpServletRequest request) {
 
         String error = "Invalid Code!";
         HttpStatus status = HttpStatus.NOT_FOUND;

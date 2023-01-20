@@ -68,9 +68,9 @@ public class ProductController {
     }
 
     @PutMapping(value = "/amount/{code}")
-    public ResponseEntity<Void> teste(@PathVariable String code ,@RequestBody @Valid RequestAmountDTO requestDTO) {
+    public ResponseEntity<Void> teste(@PathVariable String code, @RequestBody @Valid RequestAmountDTO requestDTO) {
 
-        service.sendMessageUpdateAmount(code,requestDTO);
+        service.sendMessageUpdateAmount(code, requestDTO);
         return ResponseEntity.ok().build();
     }
 

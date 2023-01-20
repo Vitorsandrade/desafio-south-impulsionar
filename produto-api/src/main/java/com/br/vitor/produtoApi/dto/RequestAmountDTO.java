@@ -1,6 +1,9 @@
 package com.br.vitor.produtoApi.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.With;
 
 import javax.validation.constraints.NotNull;
 

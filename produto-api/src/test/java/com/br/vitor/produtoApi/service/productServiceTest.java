@@ -1,9 +1,11 @@
 package com.br.vitor.produtoApi.service;
 
+import com.br.vitor.produtoApi.dto.RequestProductDTO;
 import com.br.vitor.produtoApi.entity.Product;
 import com.br.vitor.produtoApi.mapper.ProductMapper;
 import com.br.vitor.produtoApi.repository.ProductRepository;
 import com.br.vitor.produtoApi.util.ProductCreator;
+import com.br.vitor.produtoApi.util.RequestDTOCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,15 +83,6 @@ public class productServiceTest {
         Assertions.assertThat(product.getId()).isNotNull().isNotEqualTo(expectedId);
     }
 
-//    @Test
-//    void testInsertService() {
-//        Product productSave = ProductCreator.createProductWithAllAttributesFakerMinusTheName();
-//
-//        var response = productService.insert(productSave);
-//
-//        Assertions.assertThat(productSave).isNotNull();
-//        Assertions.assertThat(productSave.getName()).isEqualTo("teste");
-//    }
 
     @Test
     void testDeleteProductService() {
@@ -102,7 +95,7 @@ public class productServiceTest {
     @Test
     void testUpdateDataService() {
         var p1 = ProductCreator.createProductWithAllAttributesFakerMinusTheName();
-        var p2 = ProductCreator.createProductWithAllAttributes();
+        var p2 = ProductCreator.createProductWithAllAttributesFakerMinusTheName();
 
         productService.updateData(p1, p2);
 

@@ -1,9 +1,11 @@
 package com.br.vitor.produtoApi.resource;
 
+import com.br.vitor.produtoApi.dto.ProductDTO;
 import com.br.vitor.produtoApi.entity.Product;
 import com.br.vitor.produtoApi.service.ProductService;
 import com.br.vitor.produtoApi.util.ProductCreator;
 import com.br.vitor.produtoApi.util.ProductDTOCreator;
+import com.br.vitor.produtoApi.util.RequestDTOCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,11 +83,11 @@ class ProductControllerTest {
         Assertions.assertThat(product.getId()).isNotNull().isNotEqualTo(expectedId);
     }
 
-//    @Test
-//    void testInsertProductController() {
-//        ProductDTO product = productController.insert(ProductCreator.createProductWithAllAttributes()).getBody();
-//        Assertions.assertThat(product).isNotNull();
-//    }
+    @Test
+    void testInsertProductController() {
+        ProductDTO product = productController.insert(RequestDTOCreator.createRequestProductDto()).getBody();
+        Assertions.assertThat(product).isNotNull();
+    }
 
     @Test
     void testDeleteProductController() {

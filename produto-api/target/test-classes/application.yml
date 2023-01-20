@@ -16,3 +16,5 @@ security:
       scope: password
       client-id: south
       client-secret: 12345
+  rabbit:
+    enabled: false

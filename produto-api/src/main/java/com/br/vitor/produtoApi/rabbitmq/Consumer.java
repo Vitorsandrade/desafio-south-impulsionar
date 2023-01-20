@@ -32,35 +32,36 @@ public class Consumer {
     ProductMapper productMapper;
 
     @RabbitListener(queues = RabbitConfig.queue)
-    public void productConsumer(Message<String> payload){
+    public void productConsumer(Message<String> payload) {
 
         Object message = payload.getHeaders().get("EVENT");
         log.info("Receive Message " + message);
         try {
-        switch (Objects.requireNonNull(message).toString()) {
-            case "PRODUCT_CHANGED":
-                Product productChangedAmount = mapper.readValue(payload.getPayload(), Product.class);
-                repository.save(productChangedAmount);
-                log.info(productChangedAmount.getName() + " product amount updated to: " + productChangedAmount.getAmount() + "!");
-                break;
-            case "POST":
-                Product insertionProduct = mapper.readValue(payload.getPayload(), Product.class);
-                service.insert(productMapper.productToRequestDTO(insertionProduct));
-                log.info("inserted product: " + insertionProduct.toString());
-                break;
-            case "DELETE":
+            switch (Objects.requireNonNull(message).toString()) {
+                case "PRODUCT_CHANGED":
+                    Product productChangedAmount = mapper.readValue(payload.getPayload(), Product.class);
+                    repository.save(productChangedAmount);
+                    log.info(productChangedAmount.getName() + " product amount updated to: " + productChangedAmount.getAmount() + "!");
+                    break;
+                case "POST":
+                    Product insertionProduct = mapper.readValue(payload.getPayload(), Product.class);
+                    service.insert(productMapper.productToRequestDTO(insertionProduct));
+                    log.info("inserted product: " + insertionProduct.toString());
+                    break;
+                case "DELETE":
                     Long id = mapper.readValue(payload.getPayload(), Long.class);
                     service.delete(id);
                     log.info("product id " + id + " deleted!");
-                break;
-            case "UPDATE":
-                ProductDTO productToUpdate = mapper.readValue(payload.getPayload(), ProductDTO.class);
-                service.update(productToUpdate.getId(), productMapper.productDTOToRequestDTO(productToUpdate));
-                log.info("product id " + productToUpdate.getId() + " updated!");
-                break;
-            case "teste":
-                break;
-        } }catch (Exception e){
+                    break;
+                case "UPDATE":
+                    ProductDTO productToUpdate = mapper.readValue(payload.getPayload(), ProductDTO.class);
+                    service.update(productToUpdate.getId(), productMapper.productDTOToRequestDTO(productToUpdate));
+                    log.info("product id " + productToUpdate.getId() + " updated!");
+                    break;
+                case "teste":
+                    break;
+            }
+        } catch (Exception e) {
             log.error(e.getMessage());
 
         }

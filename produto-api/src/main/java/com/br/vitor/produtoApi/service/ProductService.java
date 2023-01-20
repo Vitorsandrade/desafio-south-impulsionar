@@ -1,5 +1,6 @@
 package com.br.vitor.produtoApi.service;
 
+import com.br.vitor.produtoApi.config.RabbitConfig;
 import com.br.vitor.produtoApi.dto.ProductDTO;
 import com.br.vitor.produtoApi.dto.RequestAmountDTO;
 import com.br.vitor.produtoApi.dto.RequestProductDTO;
@@ -8,7 +9,6 @@ import com.br.vitor.produtoApi.exceptions.InvalidCodeException;
 import com.br.vitor.produtoApi.exceptions.InvalidFileException;
 import com.br.vitor.produtoApi.exceptions.ResourceNotFoundException;
 import com.br.vitor.produtoApi.mapper.ProductMapper;
-import com.br.vitor.produtoApi.config.RabbitConfig;
 import com.br.vitor.produtoApi.repository.ProductRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -99,7 +99,7 @@ public class ProductService {
         entity.setDescription(product.getDescription());
         entity.setName(product.getName());
         entity.setMaterial(product.getMaterial());
-        entity.setPrice(finalValue(product.getTax(), product.getPrice()));
+        entity.setPrice(product.getPrice());
         entity.setTax(product.getTax());
     }
 
@@ -135,6 +135,7 @@ public class ProductService {
                         , new BigDecimal(data[6].replace(",", ".").replace("\"", "")));
 
                 DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                BigDecimal tax = new BigDecimal(data[7].replace(",", ".").replace("\"", "")).setScale(2, RoundingMode.CEILING);
 
                 LocalDate manufacturingDate = LocalDate.parse(data[8], fmt1);
 
@@ -146,7 +147,7 @@ public class ProductService {
 
                 Product product = Product.builder().id(null).code(data[0]).barCode(data[1]).series(data[2]).name(data[3])
                         .description(data[4]).price(price).manufacturingDate(manufacturingDate).expirationDate(expirationDate)
-                        .color(data[10]).material(data[11]).category(data[5]).build();
+                        .color(data[10]).material(data[11]).category(data[5]).tax(tax).build();
 
                 insertFromFile(data[0], product);
 
@@ -251,6 +252,7 @@ public class ProductService {
 
         return randomString;
     }
+
     @PostConstruct
     public void queue() throws JsonProcessingException {
         String request = objectMapper.writeValueAsString(new Product());
