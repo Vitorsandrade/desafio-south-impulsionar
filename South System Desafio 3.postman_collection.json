@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e286b04d-2cb2-4057-a164-759ee6db1d01",
+		"_postman_id": "c29fc065-fb6b-4dc1-a0f1-b93a76cfa4ae",
 		"name": "South System Desafio 3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20471463"
@@ -101,7 +101,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \r\n        \"name\": \"mesa\",\r\n        \"description\": \"Mesa muita boa\",\r\n        \"price\": 100.9,\r\n        \"manufacturingDate\": \"2022-11-15\",\r\n        \"expirationDate\": null,\r\n        \"color\": \"marron\",\r\n        \"material\": \"madeira\",\r\n        \"category\": \"Doméstico\",\r\n        \"amount\": 15,\r\n        \"tax\": 10\r\n    }",
+							"raw": "{\r\n        \r\n        \"name\": \"mesa\",\r\n        \"description\": \"Mesa muita boa\",\r\n        \"price\": 100.9,\r\n        \"manufacturingDate\": \"2022-11-15\",\r\n        \"expirationDate\": null,\r\n        \"color\": \"marron\",\r\n        \"material\": \"madeira\",\r\n        \"category\": \"Doméstico\",\r\n        \"tax\": 10\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,7 +228,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"code\": \"cxzudb7f\",\r\n        \"barCode\": \"288392160324\",\r\n        \"series\": \"s\",\r\n        \"name\": \"mesa\",\r\n        \"description\": null,\r\n        \"price\": 100.9,\r\n        \"manufacturingDate\": \"2022-11-15\",\r\n        \"expirationDate\": null,\r\n        \"color\": null,\r\n        \"material\": null,\r\n        \"category\": \"madeira\",\r\n        \"amount\": 10\r\n    }",
+							"raw": "{\r\n        \"name\": \"mesa\",\r\n        \"description\": \"Mesa especial\",\r\n        \"price\": 100.9,\r\n        \"manufacturingDate\": \"2022-11-15\",\r\n        \"expirationDate\": null,\r\n        \"color\": \"marron\",\r\n        \"material\": \"madeira\",\r\n        \"category\": \"casa\",\r\n        \"tax\": 10\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -295,6 +295,16 @@
 				{
 					"name": "PUT - amount product with RabbitMQ",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -377,7 +387,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \r\n        \"name\": \"mesa\",\r\n        \"description\": \"Mesa muita boa\",\r\n        \"price\": 100.9,\r\n        \"manufacturingDate\": \"2022-11-15\",\r\n        \"expirationDate\": null,\r\n        \"color\": \"marron\",\r\n        \"material\": \"madeira\",\r\n        \"category\": \"Doméstico\",\r\n        \"amount\": 15,\r\n        \"tax\": 10\r\n    }",
+							"raw": "{\r\n        \r\n        \"name\": \"mesa\",\r\n        \"description\": \"Mesa muita boa\",\r\n        \"price\": 100.9,\r\n        \"manufacturingDate\": \"2022-11-15\",\r\n        \"expirationDate\": null,\r\n        \"color\": \"marron\",\r\n        \"material\": \"madeira\",\r\n        \"category\": \"Doméstico\",\r\n        \"tax\": 10\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -414,7 +424,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/send/update/1",
+							"raw": "http://localhost:8081/send/update/17",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -423,7 +433,7 @@
 							"path": [
 								"send",
 								"update",
-								"1"
+								"17"
 							]
 						}
 					},
@@ -435,7 +445,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/send/delete/1",
+							"raw": "http://localhost:8081/send/delete/17",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -444,7 +454,7 @@
 							"path": [
 								"send",
 								"delete",
-								"1"
+								"17"
 							]
 						}
 					},
